@@ -8,7 +8,7 @@ namespace dovidnyk_numizmata
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            Application.Run(new CoinsForm());
         }
     }
 }

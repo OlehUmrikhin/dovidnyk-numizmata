@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             titleCoinsLabel = new Label();
             countryCoinsLabel = new Label();
             parCoinsLabel = new Label();
@@ -36,6 +37,7 @@
             numberCoinsLabel = new Label();
             FeaturesCoinsLabel = new Label();
             countryCoinsTextBox = new TextBox();
+            coinBindingSource = new BindingSource(components);
             parCoinsTextBox = new TextBox();
             yearOfGraduationCoinsTextBox = new TextBox();
             materialCoinsTextBox = new TextBox();
@@ -49,9 +51,9 @@
             menuStrip1 = new MenuStrip();
             закритиToolStripMenuItem = new ToolStripMenuItem();
             зберігтиToolStripMenuItem = new ToolStripMenuItem();
-            вийтиЗДодаткуToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             clearButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)coinBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -122,13 +124,20 @@
             // 
             // countryCoinsTextBox
             // 
+            countryCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Country", true));
             countryCoinsTextBox.Location = new Point(124, 74);
             countryCoinsTextBox.Name = "countryCoinsTextBox";
             countryCoinsTextBox.Size = new Size(259, 23);
             countryCoinsTextBox.TabIndex = 7;
+            countryCoinsTextBox.Text = " ";
+            // 
+            // coinBindingSource
+            // 
+            coinBindingSource.DataSource = typeof(Coin);
             // 
             // parCoinsTextBox
             // 
+            parCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Par", true));
             parCoinsTextBox.Location = new Point(124, 103);
             parCoinsTextBox.Name = "parCoinsTextBox";
             parCoinsTextBox.Size = new Size(259, 23);
@@ -136,6 +145,7 @@
             // 
             // yearOfGraduationCoinsTextBox
             // 
+            yearOfGraduationCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "YearOfGraduation", true));
             yearOfGraduationCoinsTextBox.Location = new Point(124, 140);
             yearOfGraduationCoinsTextBox.Name = "yearOfGraduationCoinsTextBox";
             yearOfGraduationCoinsTextBox.Size = new Size(259, 23);
@@ -143,6 +153,7 @@
             // 
             // materialCoinsTextBox
             // 
+            materialCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Material", true));
             materialCoinsTextBox.Location = new Point(124, 172);
             materialCoinsTextBox.Name = "materialCoinsTextBox";
             materialCoinsTextBox.Size = new Size(259, 23);
@@ -150,6 +161,7 @@
             // 
             // numberCoinsTextBox
             // 
+            numberCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Number", true));
             numberCoinsTextBox.Location = new Point(219, 207);
             numberCoinsTextBox.Name = "numberCoinsTextBox";
             numberCoinsTextBox.Size = new Size(164, 23);
@@ -157,6 +169,7 @@
             // 
             // featuresCoinsTextBox
             // 
+            featuresCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Features", true));
             featuresCoinsTextBox.Location = new Point(182, 242);
             featuresCoinsTextBox.Name = "featuresCoinsTextBox";
             featuresCoinsTextBox.Size = new Size(201, 23);
@@ -165,6 +178,8 @@
             // coinsListBox
             // 
             coinsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            coinsListBox.DataSource = coinBindingSource;
+            coinsListBox.DisplayMember = "Info";
             coinsListBox.Font = new Font("Segoe UI", 12F);
             coinsListBox.FormattingEnabled = true;
             coinsListBox.Location = new Point(424, 69);
@@ -203,7 +218,6 @@
             editButton.TabIndex = 16;
             editButton.Text = "Редагувати";
             editButton.UseVisualStyleBackColor = true;
-            editButton.Click += editButton_Click;
             // 
             // searchButton
             // 
@@ -217,7 +231,7 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { закритиToolStripMenuItem, зберігтиToolStripMenuItem, вийтиЗДодаткуToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { закритиToolStripMenuItem, зберігтиToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1014, 24);
@@ -229,6 +243,7 @@
             закритиToolStripMenuItem.Name = "закритиToolStripMenuItem";
             закритиToolStripMenuItem.Size = new Size(64, 20);
             закритиToolStripMenuItem.Text = "Закрити";
+            закритиToolStripMenuItem.Click += закритиToolStripMenuItem_Click;
             // 
             // зберігтиToolStripMenuItem
             // 
@@ -236,13 +251,6 @@
             зберігтиToolStripMenuItem.Size = new Size(69, 20);
             зберігтиToolStripMenuItem.Text = "Зберегти";
             зберігтиToolStripMenuItem.Click += зберігтиToolStripMenuItem_Click;
-            // 
-            // вийтиЗДодаткуToolStripMenuItem
-            // 
-            вийтиЗДодаткуToolStripMenuItem.Name = "вийтиЗДодаткуToolStripMenuItem";
-            вийтиЗДодаткуToolStripMenuItem.Size = new Size(105, 20);
-            вийтиЗДодаткуToolStripMenuItem.Text = "Вийти з додатку";
-            вийтиЗДодаткуToolStripMenuItem.Click += вийтиЗДодаткуToolStripMenuItem_Click;
             // 
             // panel1
             // 
@@ -270,6 +278,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(1014, 450);
             Controls.Add(panel1);
             Controls.Add(coinsListBox);
@@ -290,6 +299,8 @@
             MainMenuStrip = menuStrip1;
             Name = "CoinsForm";
             Text = "CoinsForm";
+            Click += CoinsForm_Click;
+            ((System.ComponentModel.ISupportInitialize)coinBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -320,8 +331,8 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem закритиToolStripMenuItem;
         private ToolStripMenuItem зберігтиToolStripMenuItem;
-        private ToolStripMenuItem вийтиЗДодаткуToolStripMenuItem;
         private Panel panel1;
         private Button clearButton;
+        private BindingSource coinBindingSource;
     }
 }

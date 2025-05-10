@@ -15,6 +15,14 @@ namespace dovidnyk_numizmata
         public string Material { get; set; }
         public string Number { get; set; }
         public string Features { get; set; }
+        public string Info 
+        {
+            get 
+            {
+                return ToString();
+            }
+            
+        }
 
         public Coin(string Country, string Par, string YearOfGraduation, string Material, string Number, string Features)
         {
@@ -28,7 +36,7 @@ namespace dovidnyk_numizmata
 
         public override string ToString()
         {
-            return $"{Country} - {Par} ({YearOfGraduation}), Матеріал: {Material}, Кількість: {Number}, Особливості: {Features}";
+            return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Number}  |  Особливості: {Features}";
         }
 
         public bool Equals(Coin other)
