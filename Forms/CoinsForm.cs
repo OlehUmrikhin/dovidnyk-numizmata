@@ -1,10 +1,10 @@
 ﻿using dovidnyk_numizmata.Forms;
+using dovidnyk_numizmata;
+using dovidnyk_numizmata.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Metrics;
-using System.DirectoryServices;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,33 +12,30 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace dovidnyk_numizmata
+namespace dovidnyk_numizmata.Forms
 {
     public partial class CoinsForm : Form
     {
-        private BindingList<Coin> coinsList = new BindingList<Coin>();
-        private BindingList<Coin> searchResultsList = new BindingList<Coin>();
+        private MyCollectionForm myCollectionForm;
+        private CollectorsForm collectorsForm;
         private bool isSearchActive = false;
-        public bool isEdit = false;
+        private bool isEdit = false;
 
         public CoinsForm()
         {
             InitializeComponent();
-            string jsonString = File.ReadAllText("data.txt");
-            coinsList = JsonSerializer.Deserialize<BindingList<Coin>>(jsonString);
-            coinBindingSource.DataSource = coinsList;
-
+            coinBindingSource.DataSource = AppState.CoinsList;
             //coinsListBox.SelectedIndex = -1;
-            //coinsList.Add(new Coin("Україна", "1 гривня", "1996", "матеріал2", "1", "Перша гривня"));
-            //coinsList.Add(new Coin("Україна", "2 гривні", "2024", "матеріал3", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "3 гривні", "2025", "матеріал4", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "4 гривні", "2026", "матеріал5", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "5 гривні", "2027", "матеріал6", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "6 гривні", "2028", "матеріал7", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "7 гривні", "2029", "матеріал8", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "8 гривні", "2030", "матеріал9", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "9 гривні", "2031", "матеріал10", "1", "нема"));
-            //coinsList.Add(new Coin("Україна", "10 гривні", "2032", "матеріал11", "1", "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "1 гривня", "1996", "матеріал1", 10, "Перша гривня"));
+            //AppState.CoinsList.Add(new Coin("Україна", "2 гривні", "2024", "матеріал2", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "3 гривні", "2025", "матеріал3", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "4 гривні", "2026", "матеріал4", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "5 гривні", "2027", "матеріал5", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "6 гривні", "2028", "матеріал6", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "7 гривні", "2029", "матеріал7", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "8 гривні", "2030", "матеріал8", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "9 гривні", "2031", "матеріал9", 10, "нема"));
+            //AppState.CoinsList.Add(new Coin("Україна", "10 гривні", "2032", "матеріал10", 10, "нема"));
             //coinBindingSource.ResetBindings(true);
         }
 
@@ -48,15 +45,15 @@ namespace dovidnyk_numizmata
             string par = parCoinsTextBox.Text;
             string year = yearOfGraduationCoinsTextBox.Text;
             string material = materialCoinsTextBox.Text;
-            string number = numberCoinsTextBox.Text;
+            int number = Int32.Parse(numberCoinsTextBox.Text);
             string features = featuresCoinsTextBox.Text;
 
             //ClearInputFields();
 
             Coin newCoin = new Coin(country, par, year, material, number, features);
-            if (!string.IsNullOrEmpty(newCoin.Country) && !string.IsNullOrEmpty(newCoin.Par) && !string.IsNullOrEmpty(newCoin.YearOfGraduation) && !string.IsNullOrEmpty(newCoin.Material) && !string.IsNullOrEmpty(newCoin.Number) && !string.IsNullOrEmpty(newCoin.Features))
+            if (!string.IsNullOrEmpty(newCoin.Country) && !string.IsNullOrEmpty(newCoin.Par) && !string.IsNullOrEmpty(newCoin.YearOfGraduation) && !string.IsNullOrEmpty(newCoin.Material) && newCoin.Amount > 0 && !string.IsNullOrEmpty(newCoin.Features))
             {
-                coinsList.Add(newCoin);
+                AppState.CoinsList.Add(newCoin);
                 isEdit = true;
                 coinBindingSource.ResetBindings(true);
             }
@@ -70,20 +67,10 @@ namespace dovidnyk_numizmata
         {
             if (coinsListBox.SelectedItem is Coin coinToRemove)
             {
-                if (isSearchActive)
-                {
-                    searchResultsList.Remove(coinToRemove);
-                    coinsList.Remove(coinToRemove);
-                    isEdit = true;
-                }
-                else
-                {
-                    coinsList.Remove(coinToRemove);
-                    isEdit = true;
-                }
+                AppState.CoinsList.Remove(coinToRemove);
+                isEdit = true;
                 coinBindingSource.ResetBindings(false);
                 deleteButton.Enabled = false;
-                editButton.Enabled = false;
                 coinsListBox.SelectedIndex = -1;
             }
         }
@@ -123,18 +110,17 @@ namespace dovidnyk_numizmata
             string.IsNullOrEmpty(numberSearch) && string.IsNullOrEmpty(featuresSearch) &&
             isSearchActive)
             {
-                coinBindingSource.DataSource = coinsList;
+                coinBindingSource.DataSource = AppState.CoinsList;
                 isSearchActive = false;
                 coinsListBox.SelectedIndex = -1;
                 return;
             }
 
-            List<Coin> results = coinsList.Where(coin =>
+            List<Coin> results = AppState.CoinsList.Where(coin =>
                 (string.IsNullOrEmpty(countrySearch) || coin.Country.ToLower().Contains(countrySearch)) &&
                 (string.IsNullOrEmpty(parSearch) || coin.Par.ToLower().Contains(parSearch)) &&
                 (string.IsNullOrEmpty(yearSearch) || coin.YearOfGraduation.ToLower().Contains(yearSearch)) &&
                 (string.IsNullOrEmpty(materialSearch) || coin.Material.ToLower().Contains(materialSearch)) &&
-                (string.IsNullOrEmpty(numberSearch) || coin.Number.ToLower().Contains(numberSearch)) &&
                 (string.IsNullOrEmpty(featuresSearch) || coin.Features.ToLower().Contains(featuresSearch))
             ).ToList();
 
@@ -150,9 +136,10 @@ namespace dovidnyk_numizmata
 
         private void зберігтиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string jsonString = JsonSerializer.Serialize(coinsList);
+            string jsonString = JsonSerializer.Serialize(AppState.CoinsList);
             File.WriteAllText("data.txt", jsonString);
             MessageBox.Show("Дані збережені!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            isEdit = false;
         }
 
         private void CoinsForm_Click(object sender, EventArgs e)
@@ -182,7 +169,6 @@ namespace dovidnyk_numizmata
             bool isItemSelected = (coinsListBox.SelectedIndex != -1);
             addButton.Enabled = !isItemSelected;
             deleteButton.Enabled = isItemSelected;
-            editButton.Enabled = isItemSelected;
 
             if (isItemSelected && coinBindingSource.Current is Coin selectedCoin)
             {
@@ -209,7 +195,7 @@ namespace dovidnyk_numizmata
 
                 if (numberCoinsTextBox.DataBindings["Text"] == null)
                 {
-                    numberCoinsTextBox.DataBindings.Add("Text", coinBindingSource, "Number");
+                    numberCoinsTextBox.DataBindings.Add("Text", coinBindingSource, "Amount");
                 }
 
                 if (featuresCoinsTextBox.DataBindings["Text"] == null)
@@ -228,14 +214,32 @@ namespace dovidnyk_numizmata
                 switch (result)
                 {
                     case DialogResult.Yes:
-                        string jsonString = JsonSerializer.Serialize(coinsList);
+                        string jsonString = JsonSerializer.Serialize(AppState.CoinsList);
                         File.WriteAllText("data.txt", jsonString);
-                        break;
+                        Close(); break;
                     case DialogResult.No:
-                        break;
+                        Close(); break;
                 }
             }
-            else this.Close();
+            else Close();
+        }
+
+        private void мояКолекціяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (myCollectionForm == null || myCollectionForm.IsDisposed)
+            {
+                myCollectionForm = new MyCollectionForm();
+            }
+            myCollectionForm.Show();
+        }
+
+        private void колекціонериToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (collectorsForm == null || collectorsForm.IsDisposed)
+            {
+                collectorsForm = new CollectorsForm();
+            }
+            collectorsForm.Show();
         }
     }
 }

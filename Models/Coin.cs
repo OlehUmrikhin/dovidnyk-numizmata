@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace dovidnyk_numizmata
+namespace dovidnyk_numizmata.Models
 {
     public class Coin
     {
+        public Guid Id { get; set; }
         public string Country { get; set; }
         public string Par { get; set; }
         public string YearOfGraduation { get; set; }
         public string Material { get; set; }
-        public string Number { get; set; }
+        public int Amount { get; set; }
         public string Features { get; set; }
+        [JsonIgnore]
         public string Info 
         {
             get 
@@ -24,19 +27,32 @@ namespace dovidnyk_numizmata
             
         }
 
-        public Coin(string Country, string Par, string YearOfGraduation, string Material, string Number, string Features)
+        public Coin(string Country, string Par, string YearOfGraduation, string Material, int Amount, string Features)
         {
+            this.Id = Guid.NewGuid();
             this.Country = Country;
             this.Par = Par;
             this.YearOfGraduation = YearOfGraduation;
             this.Material = Material;
-            this.Number = Number;
+            this.Amount = Amount;
+            this.Features = Features;
+        }
+
+        [JsonConstructor]
+        public Coin(Guid Id, string Country, string Par, string YearOfGraduation, string Material, int Amount, string Features)
+        {
+            this.Id = Id;
+            this.Country = Country;
+            this.Par = Par;
+            this.YearOfGraduation = YearOfGraduation;
+            this.Material = Material;
+            this.Amount = Amount;
             this.Features = Features;
         }
 
         public override string ToString()
         {
-            return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Number}  |  Особливості: {Features}";
+            return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Amount}  |  Особливості: {Features}";
         }
 
         public bool Equals(Coin other)
@@ -48,7 +64,7 @@ namespace dovidnyk_numizmata
                    Par == other.Par &&
                    YearOfGraduation == other.YearOfGraduation &&
                    Material == other.Material &&
-                   Number == other.Number &&
+                   Amount == other.Amount &&
                    Features == other.Features;
         }
 

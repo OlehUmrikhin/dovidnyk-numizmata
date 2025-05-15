@@ -1,4 +1,5 @@
 using dovidnyk_numizmata.Forms;
+using dovidnyk_numizmata.Models;
 
 namespace dovidnyk_numizmata
 {
@@ -8,6 +9,7 @@ namespace dovidnyk_numizmata
         static void Main()
         {
             ApplicationConfiguration.Initialize();
+            AppState.Initialize();
             Application.Run(new CoinsForm());
         }
     }

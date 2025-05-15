@@ -1,4 +1,6 @@
-﻿namespace dovidnyk_numizmata
+﻿using dovidnyk_numizmata.Models;
+
+namespace dovidnyk_numizmata.Forms
 {
     partial class CoinsForm
     {
@@ -46,11 +48,12 @@
             coinsListBox = new ListBox();
             addButton = new Button();
             deleteButton = new Button();
-            editButton = new Button();
             searchButton = new Button();
             menuStrip1 = new MenuStrip();
             закритиToolStripMenuItem = new ToolStripMenuItem();
             зберігтиToolStripMenuItem = new ToolStripMenuItem();
+            колекціонериToolStripMenuItem = new ToolStripMenuItem();
+            мояКолекціяToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             clearButton = new Button();
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).BeginInit();
@@ -62,7 +65,7 @@
             // 
             titleCoinsLabel.AutoSize = true;
             titleCoinsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            titleCoinsLabel.Location = new Point(435, 28);
+            titleCoinsLabel.Location = new Point(492, 28);
             titleCoinsLabel.Name = "titleCoinsLabel";
             titleCoinsLabel.Size = new Size(186, 21);
             titleCoinsLabel.TabIndex = 0;
@@ -71,7 +74,7 @@
             // countryCoinsLabel
             // 
             countryCoinsLabel.AutoSize = true;
-            countryCoinsLabel.Location = new Point(52, 77);
+            countryCoinsLabel.Location = new Point(52, 70);
             countryCoinsLabel.Name = "countryCoinsLabel";
             countryCoinsLabel.Size = new Size(46, 15);
             countryCoinsLabel.TabIndex = 1;
@@ -80,7 +83,7 @@
             // parCoinsLabel
             // 
             parCoinsLabel.AutoSize = true;
-            parCoinsLabel.Location = new Point(52, 108);
+            parCoinsLabel.Location = new Point(52, 105);
             parCoinsLabel.Name = "parCoinsLabel";
             parCoinsLabel.Size = new Size(58, 15);
             parCoinsLabel.TabIndex = 2;
@@ -89,7 +92,7 @@
             // yearOfGraduationCoinsLabel
             // 
             yearOfGraduationCoinsLabel.AutoSize = true;
-            yearOfGraduationCoinsLabel.Location = new Point(52, 143);
+            yearOfGraduationCoinsLabel.Location = new Point(52, 140);
             yearOfGraduationCoinsLabel.Name = "yearOfGraduationCoinsLabel";
             yearOfGraduationCoinsLabel.Size = new Size(73, 15);
             yearOfGraduationCoinsLabel.TabIndex = 3;
@@ -116,7 +119,7 @@
             // FeaturesCoinsLabel
             // 
             FeaturesCoinsLabel.AutoSize = true;
-            FeaturesCoinsLabel.Location = new Point(51, 245);
+            FeaturesCoinsLabel.Location = new Point(52, 245);
             FeaturesCoinsLabel.Name = "FeaturesCoinsLabel";
             FeaturesCoinsLabel.Size = new Size(124, 15);
             FeaturesCoinsLabel.TabIndex = 6;
@@ -125,20 +128,16 @@
             // countryCoinsTextBox
             // 
             countryCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Country", true));
-            countryCoinsTextBox.Location = new Point(124, 74);
+            countryCoinsTextBox.Location = new Point(124, 66);
             countryCoinsTextBox.Name = "countryCoinsTextBox";
             countryCoinsTextBox.Size = new Size(259, 23);
             countryCoinsTextBox.TabIndex = 7;
             countryCoinsTextBox.Text = " ";
             // 
-            // coinBindingSource
-            // 
-            coinBindingSource.DataSource = typeof(Coin);
-            // 
             // parCoinsTextBox
             // 
             parCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Par", true));
-            parCoinsTextBox.Location = new Point(124, 103);
+            parCoinsTextBox.Location = new Point(124, 102);
             parCoinsTextBox.Name = "parCoinsTextBox";
             parCoinsTextBox.Size = new Size(259, 23);
             parCoinsTextBox.TabIndex = 8;
@@ -146,7 +145,7 @@
             // yearOfGraduationCoinsTextBox
             // 
             yearOfGraduationCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "YearOfGraduation", true));
-            yearOfGraduationCoinsTextBox.Location = new Point(124, 140);
+            yearOfGraduationCoinsTextBox.Location = new Point(124, 137);
             yearOfGraduationCoinsTextBox.Name = "yearOfGraduationCoinsTextBox";
             yearOfGraduationCoinsTextBox.Size = new Size(259, 23);
             yearOfGraduationCoinsTextBox.TabIndex = 9;
@@ -161,7 +160,7 @@
             // 
             // numberCoinsTextBox
             // 
-            numberCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Number", true));
+            numberCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Amount", true));
             numberCoinsTextBox.Location = new Point(219, 207);
             numberCoinsTextBox.Name = "numberCoinsTextBox";
             numberCoinsTextBox.Size = new Size(164, 23);
@@ -180,17 +179,17 @@
             coinsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             coinsListBox.DataSource = coinBindingSource;
             coinsListBox.DisplayMember = "Info";
-            coinsListBox.Font = new Font("Segoe UI", 12F);
+            coinsListBox.Font = new Font("Segoe UI", 11F);
             coinsListBox.FormattingEnabled = true;
             coinsListBox.Location = new Point(424, 69);
             coinsListBox.Name = "coinsListBox";
-            coinsListBox.Size = new Size(560, 319);
+            coinsListBox.Size = new Size(660, 304);
             coinsListBox.TabIndex = 13;
             coinsListBox.SelectedIndexChanged += coinsListBox_SelectedIndexChanged;
             // 
             // addButton
             // 
-            addButton.Location = new Point(3, 21);
+            addButton.Location = new Point(3, 10);
             addButton.Name = "addButton";
             addButton.Size = new Size(66, 50);
             addButton.TabIndex = 14;
@@ -201,7 +200,7 @@
             // deleteButton
             // 
             deleteButton.Enabled = false;
-            deleteButton.Location = new Point(75, 21);
+            deleteButton.Location = new Point(88, 10);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(67, 50);
             deleteButton.TabIndex = 15;
@@ -209,19 +208,9 @@
             deleteButton.UseVisualStyleBackColor = true;
             deleteButton.Click += deleteButton_Click;
             // 
-            // editButton
-            // 
-            editButton.Enabled = false;
-            editButton.Location = new Point(148, 21);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(75, 50);
-            editButton.TabIndex = 16;
-            editButton.Text = "Редагувати";
-            editButton.UseVisualStyleBackColor = true;
-            // 
             // searchButton
             // 
-            searchButton.Location = new Point(229, 21);
+            searchButton.Location = new Point(174, 10);
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(75, 50);
             searchButton.TabIndex = 17;
@@ -231,10 +220,10 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { закритиToolStripMenuItem, зберігтиToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { закритиToolStripMenuItem, зберігтиToolStripMenuItem, колекціонериToolStripMenuItem, мояКолекціяToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1014, 24);
+            menuStrip1.Size = new Size(1114, 24);
             menuStrip1.TabIndex = 18;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -252,21 +241,34 @@
             зберігтиToolStripMenuItem.Text = "Зберегти";
             зберігтиToolStripMenuItem.Click += зберігтиToolStripMenuItem_Click;
             // 
+            // колекціонериToolStripMenuItem
+            // 
+            колекціонериToolStripMenuItem.Name = "колекціонериToolStripMenuItem";
+            колекціонериToolStripMenuItem.Size = new Size(96, 20);
+            колекціонериToolStripMenuItem.Text = "Колекціонери";
+            колекціонериToolStripMenuItem.Click += колекціонериToolStripMenuItem_Click;
+            // 
+            // мояКолекціяToolStripMenuItem
+            // 
+            мояКолекціяToolStripMenuItem.Name = "мояКолекціяToolStripMenuItem";
+            мояКолекціяToolStripMenuItem.Size = new Size(94, 20);
+            мояКолекціяToolStripMenuItem.Text = "Моя колекція";
+            мояКолекціяToolStripMenuItem.Click += мояКолекціяToolStripMenuItem_Click;
+            // 
             // panel1
             // 
             panel1.Controls.Add(clearButton);
             panel1.Controls.Add(addButton);
             panel1.Controls.Add(searchButton);
             panel1.Controls.Add(deleteButton);
-            panel1.Controls.Add(editButton);
-            panel1.Location = new Point(14, 317);
+            panel1.Location = new Point(47, 314);
             panel1.Name = "panel1";
-            panel1.Size = new Size(391, 94);
+            panel1.Size = new Size(341, 73);
             panel1.TabIndex = 19;
             // 
             // clearButton
             // 
-            clearButton.Location = new Point(310, 21);
+            clearButton.Location = new Point(268, 10);
             clearButton.Name = "clearButton";
             clearButton.Size = new Size(68, 50);
             clearButton.TabIndex = 18;
@@ -279,7 +281,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1014, 450);
+            ClientSize = new Size(1114, 450);
             Controls.Add(panel1);
             Controls.Add(coinsListBox);
             Controls.Add(featuresCoinsTextBox);
@@ -326,7 +328,6 @@
         private ListBox coinsListBox;
         private Button addButton;
         private Button deleteButton;
-        private Button editButton;
         private Button searchButton;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem закритиToolStripMenuItem;
@@ -334,5 +335,7 @@
         private Panel panel1;
         private Button clearButton;
         private BindingSource coinBindingSource;
+        private ToolStripMenuItem колекціонериToolStripMenuItem;
+        private ToolStripMenuItem мояКолекціяToolStripMenuItem;
     }
 }
