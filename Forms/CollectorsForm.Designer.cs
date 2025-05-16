@@ -159,10 +159,11 @@ namespace dovidnyk_numizmata
             // 
             collectorListBox.DataSource = collectorBindingSource;
             collectorListBox.DisplayMember = "Info";
+            collectorListBox.Font = new Font("Segoe UI", 11F);
             collectorListBox.FormattingEnabled = true;
             collectorListBox.Location = new Point(312, 102);
             collectorListBox.Name = "collectorListBox";
-            collectorListBox.Size = new Size(458, 289);
+            collectorListBox.Size = new Size(458, 284);
             collectorListBox.TabIndex = 8;
             collectorListBox.SelectedIndexChanged += collectorsListBox_SelectedIndexChanged;
             // 

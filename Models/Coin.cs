@@ -17,6 +17,8 @@ namespace dovidnyk_numizmata.Models
         public string Material { get; set; }
         public int Amount { get; set; }
         public string Features { get; set; }
+        public int RemainingCoins { get; set; }
+
         [JsonIgnore]
         public string Info 
         {
@@ -27,7 +29,7 @@ namespace dovidnyk_numizmata.Models
             
         }
 
-        public Coin(string Country, string Par, string YearOfGraduation, string Material, int Amount, string Features)
+        public Coin(string Country, string Par, string YearOfGraduation, string Material, int Amount, string Features, int RemainingCoins)
         {
             this.Id = Guid.NewGuid();
             this.Country = Country;
@@ -36,10 +38,11 @@ namespace dovidnyk_numizmata.Models
             this.Material = Material;
             this.Amount = Amount;
             this.Features = Features;
+            this.RemainingCoins = RemainingCoins;
         }
 
         [JsonConstructor]
-        public Coin(Guid Id, string Country, string Par, string YearOfGraduation, string Material, int Amount, string Features)
+        public Coin(Guid Id, string Country, string Par, string YearOfGraduation, string Material, int Amount, string Features, int RemainingCoins)
         {
             this.Id = Id;
             this.Country = Country;
@@ -48,11 +51,12 @@ namespace dovidnyk_numizmata.Models
             this.Material = Material;
             this.Amount = Amount;
             this.Features = Features;
+            this.RemainingCoins = RemainingCoins;
         }
 
         public override string ToString()
         {
-            return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Amount}  |  Особливості: {Features}";
+            return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Amount}  |  Залишилося: {RemainingCoins}  |  Особливості: {Features}";
         }
 
         public bool Equals(Coin other)
@@ -66,6 +70,7 @@ namespace dovidnyk_numizmata.Models
                    Material == other.Material &&
                    Amount == other.Amount &&
                    Features == other.Features;
+                   RemainingCoins = other.RemainingCoins;
         }
 
         public override bool Equals(object obj)

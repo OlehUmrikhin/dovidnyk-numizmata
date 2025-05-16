@@ -32,17 +32,38 @@ namespace dovidnyk_numizmata.Forms
 
         private void searchingAllCoinsButton_Click(object sender, EventArgs e)
         {
+            string search = searchingAllCoinsTextBox.Text.Trim().ToLower();
 
+            if (string.IsNullOrEmpty(search) && isSearchActive)
+            {
+                coinBindingSource.DataSource = AppState.CoinsList;
+                isSearchActive = false;
+                AllCoinsListBox.SelectedIndex = -1;
+                return;
+            }
+
+            List<Coin> result = AppState.CoinsList.Where(curentCoin =>
+                (curentCoin.Country.ToLower().Contains(search)) ||
+                (curentCoin.Par.ToLower().Contains(search)) ||
+                (curentCoin.YearOfGraduation.ToLower().Contains(search)) ||
+                (curentCoin.Material.ToLower().Contains(search)) ||
+                (curentCoin.Features.ToLower().Contains(search))
+            ).ToList();
+
+            coinBindingSource.DataSource = result;
+            isSearchActive = true;
+            AllCoinsListBox.SelectedIndex = -1;
         }
 
         private void addCoinToCollectionOfCollectorButton_Click(object sender, EventArgs e)
         {
             Coin? selectedCoin = (Coin?)AllCoinsListBox.SelectedItem;
-            if (selectedCoin != null && selectedCoin.Amount > 0)
+            if (selectedCoin != null && selectedCoin.RemainingCoins > 0)
             {
+                selectedCoin.RemainingCoins--;
                 this.CurrentСollectioner.CollectCoin(selectedCoin, "new");
-                selectedCoin.Amount--;
                 ownedCoinBindingSource.ResetBindings(true);
+                coinBindingSource.ResetBindings(true);
                 isEdit = true;
             }
         }
@@ -57,14 +78,39 @@ namespace dovidnyk_numizmata.Forms
 
         private void deleteCoinInCollectionOfCollectorButton_Click(object sender, EventArgs e)
         {
-            //OwnedCoin selectedCoin = CollectionOfCollectorListBox.SelectedItem;
             if (CollectionOfCollectorListBox.SelectedItem is OwnedCoin selectedCoin)
             {
+                selectedCoin.Coin.RemainingCoins++;
                 this.CurrentСollectioner.DeCollectCoin(selectedCoin);
-                //selectedCoin.Amount++;
                 ownedCoinBindingSource.ResetBindings(true);
+                coinBindingSource.ResetBindings(true);
                 isEdit = true;
             }
+        }
+
+        private void searchingCollectionOfCollectorButton_Click(object sender, EventArgs e)
+        {
+            string searchedOwnedCoins = searchingCollectionOfCollectorTextBox.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(searchedOwnedCoins) && isSearchActive)
+            {
+                ownedCoinBindingSource.DataSource = CurrentСollectioner.CoinsCollection;
+                isSearchActive = false;
+                //CollectionOfCollectorListBox.SelectedIndex = -1;
+                return;
+            }
+
+            List<OwnedCoin> result = CurrentСollectioner.CoinsCollection.Where(ownedCoin =>
+                (ownedCoin.Coin.Country.ToLower().Contains(searchedOwnedCoins)) ||
+                (ownedCoin.Coin.Par.ToLower().Contains(searchedOwnedCoins)) ||
+                (ownedCoin.Coin.YearOfGraduation.ToLower().Contains(searchedOwnedCoins)) ||
+                (ownedCoin.Coin.Material.ToLower().Contains(searchedOwnedCoins)) ||
+                (ownedCoin.Coin.Features.ToLower().Contains(searchedOwnedCoins))
+            ).ToList();
+
+            ownedCoinBindingSource.DataSource = result;
+            isSearchActive = true;
+            //CollectionOfCollectorListBox.SelectedIndex = -1;
         }
     }
 }

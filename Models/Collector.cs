@@ -34,9 +34,9 @@ namespace dovidnyk_numizmata.Models
             this.Name = Name;
             this.Contacts = Contacts;
         }
-        public void CollectCoin(Coin coin, string condition)
+        public void CollectCoin(Coin coin, string Condition)
         {
-            OwnedCoin newOwnedCoin = new OwnedCoin(coin, condition);
+            OwnedCoin newOwnedCoin = new OwnedCoin(coin, Condition);
             CoinsCollection.Add(newOwnedCoin);
         }
 

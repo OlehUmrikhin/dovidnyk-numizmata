@@ -16,7 +16,7 @@ namespace dovidnyk_numizmata.Forms
 {
     public partial class CoinsForm : Form
     {
-        private MyCollectionForm myCollectionForm;
+        private CollectionsOfCollectorsForm myCollectionForm;
         private CollectorsForm collectorsForm;
         private bool isSearchActive = false;
         private bool isEdit = false;
@@ -25,18 +25,18 @@ namespace dovidnyk_numizmata.Forms
         {
             InitializeComponent();
             coinBindingSource.DataSource = AppState.CoinsList;
-            //coinsListBox.SelectedIndex = -1;
-            //AppState.CoinsList.Add(new Coin("Україна", "1 гривня", "1996", "матеріал1", 10, "Перша гривня"));
-            //AppState.CoinsList.Add(new Coin("Україна", "2 гривні", "2024", "матеріал2", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "3 гривні", "2025", "матеріал3", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "4 гривні", "2026", "матеріал4", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "5 гривні", "2027", "матеріал5", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "6 гривні", "2028", "матеріал6", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "7 гривні", "2029", "матеріал7", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "8 гривні", "2030", "матеріал8", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "9 гривні", "2031", "матеріал9", 10, "нема"));
-            //AppState.CoinsList.Add(new Coin("Україна", "10 гривні", "2032", "матеріал10", 10, "нема"));
-            //coinBindingSource.ResetBindings(true);
+            ////coinsListBox.SelectedIndex = -1;
+            //AppState.CoinsList.Add(new Coin("США", "1 долар", "1996", "матеріал1", 10, "Орел", 10));
+            //AppState.CoinsList.Add(new Coin("США", "2 долари", "2024", "матеріал2", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "3 долари", "2025", "матеріал3", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "4 долари", "2026", "матеріал4", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "5 долари", "2027", "матеріал5", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "6 долари", "2028", "матеріал6", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "7 долари", "2029", "матеріал7", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "8 долари", "2030", "матеріал8", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "9 долари", "2031", "матеріал9", 10, "нема", 10));
+            //AppState.CoinsList.Add(new Coin("США", "10 долари", "2032", "матеріал10", 10, "нема", 10));
+            coinBindingSource.ResetBindings(true);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -45,13 +45,14 @@ namespace dovidnyk_numizmata.Forms
             string par = parCoinsTextBox.Text;
             string year = yearOfGraduationCoinsTextBox.Text;
             string material = materialCoinsTextBox.Text;
-            int number = Int32.Parse(numberCoinsTextBox.Text);
             string features = featuresCoinsTextBox.Text;
+            int number = Int32.Parse(numberCoinsTextBox.Text);
+            int remainingCoins = Int32.Parse(remainingCoinsTextBox.Text);
 
             //ClearInputFields();
 
-            Coin newCoin = new Coin(country, par, year, material, number, features);
-            if (!string.IsNullOrEmpty(newCoin.Country) && !string.IsNullOrEmpty(newCoin.Par) && !string.IsNullOrEmpty(newCoin.YearOfGraduation) && !string.IsNullOrEmpty(newCoin.Material) && newCoin.Amount > 0 && !string.IsNullOrEmpty(newCoin.Features))
+            Coin newCoin = new Coin(country, par, year, material, number, features, remainingCoins);
+            if (!string.IsNullOrEmpty(newCoin.Country) && !string.IsNullOrEmpty(newCoin.Par) && !string.IsNullOrEmpty(newCoin.YearOfGraduation) && !string.IsNullOrEmpty(newCoin.Material) && newCoin.Amount > 0 && !string.IsNullOrEmpty(newCoin.Features) && newCoin.RemainingCoins > 0)
             {
                 AppState.CoinsList.Add(newCoin);
                 isEdit = true;
@@ -83,6 +84,8 @@ namespace dovidnyk_numizmata.Forms
             materialCoinsTextBox.Clear();
             numberCoinsTextBox.Clear();
             featuresCoinsTextBox.Clear();
+            remainingCoinsTextBox.Clear();
+
         }
 
         private void ClearDataBinding()
@@ -94,6 +97,7 @@ namespace dovidnyk_numizmata.Forms
             materialCoinsTextBox.DataBindings.Clear();
             numberCoinsTextBox.DataBindings.Clear();
             featuresCoinsTextBox.DataBindings.Clear();
+            remainingCoinsTextBox.DataBindings.Clear();
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -102,12 +106,12 @@ namespace dovidnyk_numizmata.Forms
             string parSearch = parCoinsTextBox.Text.Trim().ToLower();
             string yearSearch = yearOfGraduationCoinsTextBox.Text.Trim().ToLower();
             string materialSearch = materialCoinsTextBox.Text.Trim().ToLower();
-            string numberSearch = numberCoinsTextBox.Text.Trim().ToLower();
+            string amountSearch = numberCoinsTextBox.Text.Trim().ToLower();
             string featuresSearch = featuresCoinsTextBox.Text.Trim().ToLower();
 
             if (string.IsNullOrEmpty(countrySearch) && string.IsNullOrEmpty(parSearch) &&
             string.IsNullOrEmpty(yearSearch) && string.IsNullOrEmpty(materialSearch) &&
-            string.IsNullOrEmpty(numberSearch) && string.IsNullOrEmpty(featuresSearch) &&
+            string.IsNullOrEmpty(amountSearch) && string.IsNullOrEmpty(featuresSearch) &&
             isSearchActive)
             {
                 coinBindingSource.DataSource = AppState.CoinsList;
@@ -152,6 +156,7 @@ namespace dovidnyk_numizmata.Forms
             string material = materialCoinsTextBox.Text;
             string number = numberCoinsTextBox.Text;
             string features = featuresCoinsTextBox.Text;
+            string remainingCoins = remainingCoinsTextBox.Text;
 
             ClearDataBinding();
 
@@ -161,6 +166,7 @@ namespace dovidnyk_numizmata.Forms
             materialCoinsTextBox.Text = material;
             numberCoinsTextBox.Text = number;
             featuresCoinsTextBox.Text = features;
+            remainingCoinsTextBox.Text = remainingCoins;
 
         }
 
@@ -202,6 +208,11 @@ namespace dovidnyk_numizmata.Forms
                 {
                     featuresCoinsTextBox.DataBindings.Add("Text", coinBindingSource, "Features");
                 }
+
+                if (remainingCoinsTextBox.DataBindings["Text"] == null)
+                {
+                    remainingCoinsTextBox.DataBindings.Add("Text", coinBindingSource, "RemainingCoins");
+                }
             }
         }
 
@@ -228,9 +239,14 @@ namespace dovidnyk_numizmata.Forms
         {
             if (myCollectionForm == null || myCollectionForm.IsDisposed)
             {
-                myCollectionForm = new MyCollectionForm();
+                var me = AppState.CollectorsList.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
+                if(me != null)
+                {
+                    myCollectionForm = new CollectionsOfCollectorsForm(me);
+                    myCollectionForm.Show();
+                }
             }
-            myCollectionForm.Show();
+            
         }
 
         private void колекціонериToolStripMenuItem_Click(object sender, EventArgs e)
@@ -241,5 +257,6 @@ namespace dovidnyk_numizmata.Forms
             }
             collectorsForm.Show();
         }
+
     }
 }

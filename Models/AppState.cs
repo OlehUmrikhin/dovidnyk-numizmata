@@ -12,6 +12,7 @@ namespace dovidnyk_numizmata.Models
     {
         public static List<Coin> CoinsList;
         public static List<Collector> CollectorsList;
+        public static string MyId = "ba430e02-2538-4d86-be4c-a362732652cd";
 
         public static void Initialize() 
         {

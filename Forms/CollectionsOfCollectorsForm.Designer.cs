@@ -56,19 +56,23 @@ namespace dovidnyk_numizmata.Forms
             numberCollectionOfCollectorLabel = new Label();
             featuresCollectionOfCollectorLabel = new Label();
             textBox1 = new TextBox();
+            ownedCoinBindingSource = new BindingSource(components);
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
             textBox5 = new TextBox();
             textBox6 = new TextBox();
             CollectionOfCollectorListBox = new ListBox();
-            ownedCoinBindingSource = new BindingSource(components);
             CollectionOfCollectorTitle = new Label();
             searchingCollectionOfCollectorButton = new Button();
             searchingCollectionOfCollectorTextBox = new TextBox();
             deleteCoinInCollectionOfCollectorButton = new Button();
             menuStrip1 = new MenuStrip();
             зберегтиToolStripMenuItem = new ToolStripMenuItem();
+            remainingCoinsAllCoinsLabel = new Label();
+            remainingCoinsAllCoinsTextBox = new TextBox();
+            remainingCoinsCollectionOfCollectorLabel = new Label();
+            textBox7 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ownedCoinBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
@@ -191,21 +195,21 @@ namespace dovidnyk_numizmata.Forms
             AllCoinsListBox.DataSource = coinBindingSource;
             AllCoinsListBox.DisplayMember = "Info";
             AllCoinsListBox.FormattingEnabled = true;
-            AllCoinsListBox.Location = new Point(281, 64);
+            AllCoinsListBox.Location = new Point(286, 54);
             AllCoinsListBox.Name = "AllCoinsListBox";
-            AllCoinsListBox.Size = new Size(435, 364);
+            AllCoinsListBox.Size = new Size(443, 364);
             AllCoinsListBox.TabIndex = 12;
             // 
             // searchingAllCoinsTextBox
             // 
-            searchingAllCoinsTextBox.Location = new Point(122, 281);
+            searchingAllCoinsTextBox.Location = new Point(122, 287);
             searchingAllCoinsTextBox.Name = "searchingAllCoinsTextBox";
             searchingAllCoinsTextBox.Size = new Size(134, 23);
             searchingAllCoinsTextBox.TabIndex = 14;
             // 
             // searchingAllCoinsButton
             // 
-            searchingAllCoinsButton.Location = new Point(31, 281);
+            searchingAllCoinsButton.Location = new Point(31, 288);
             searchingAllCoinsButton.Name = "searchingAllCoinsButton";
             searchingAllCoinsButton.Size = new Size(75, 23);
             searchingAllCoinsButton.TabIndex = 15;
@@ -236,7 +240,7 @@ namespace dovidnyk_numizmata.Forms
             // countryCollectionOfCollectorLabel
             // 
             countryCollectionOfCollectorLabel.AutoSize = true;
-            countryCollectionOfCollectorLabel.Location = new Point(722, 72);
+            countryCollectionOfCollectorLabel.Location = new Point(730, 72);
             countryCollectionOfCollectorLabel.Name = "countryCollectionOfCollectorLabel";
             countryCollectionOfCollectorLabel.Size = new Size(46, 15);
             countryCollectionOfCollectorLabel.TabIndex = 18;
@@ -245,7 +249,7 @@ namespace dovidnyk_numizmata.Forms
             // parCollectionOfCollectorLabel
             // 
             parCollectionOfCollectorLabel.AutoSize = true;
-            parCollectionOfCollectorLabel.Location = new Point(722, 103);
+            parCollectionOfCollectorLabel.Location = new Point(730, 103);
             parCollectionOfCollectorLabel.Name = "parCollectionOfCollectorLabel";
             parCollectionOfCollectorLabel.Size = new Size(58, 15);
             parCollectionOfCollectorLabel.TabIndex = 19;
@@ -254,7 +258,7 @@ namespace dovidnyk_numizmata.Forms
             // yearOfGraduationCollectionOfCollectorLabel
             // 
             yearOfGraduationCollectionOfCollectorLabel.AutoSize = true;
-            yearOfGraduationCollectionOfCollectorLabel.Location = new Point(722, 137);
+            yearOfGraduationCollectionOfCollectorLabel.Location = new Point(730, 137);
             yearOfGraduationCollectionOfCollectorLabel.Name = "yearOfGraduationCollectionOfCollectorLabel";
             yearOfGraduationCollectionOfCollectorLabel.Size = new Size(73, 15);
             yearOfGraduationCollectionOfCollectorLabel.TabIndex = 20;
@@ -263,7 +267,7 @@ namespace dovidnyk_numizmata.Forms
             // materialCollectionOfCollectorLabel
             // 
             materialCollectionOfCollectorLabel.AutoSize = true;
-            materialCollectionOfCollectorLabel.Location = new Point(722, 170);
+            materialCollectionOfCollectorLabel.Location = new Point(730, 168);
             materialCollectionOfCollectorLabel.Name = "materialCollectionOfCollectorLabel";
             materialCollectionOfCollectorLabel.Size = new Size(61, 15);
             materialCollectionOfCollectorLabel.TabIndex = 21;
@@ -272,7 +276,7 @@ namespace dovidnyk_numizmata.Forms
             // numberCollectionOfCollectorLabel
             // 
             numberCollectionOfCollectorLabel.AutoSize = true;
-            numberCollectionOfCollectorLabel.Location = new Point(722, 204);
+            numberCollectionOfCollectorLabel.Location = new Point(730, 204);
             numberCollectionOfCollectorLabel.Name = "numberCollectionOfCollectorLabel";
             numberCollectionOfCollectorLabel.Size = new Size(162, 15);
             numberCollectionOfCollectorLabel.TabIndex = 22;
@@ -281,7 +285,7 @@ namespace dovidnyk_numizmata.Forms
             // featuresCollectionOfCollectorLabel
             // 
             featuresCollectionOfCollectorLabel.AutoSize = true;
-            featuresCollectionOfCollectorLabel.Location = new Point(722, 238);
+            featuresCollectionOfCollectorLabel.Location = new Point(730, 238);
             featuresCollectionOfCollectorLabel.Name = "featuresCollectionOfCollectorLabel";
             featuresCollectionOfCollectorLabel.Size = new Size(80, 15);
             featuresCollectionOfCollectorLabel.TabIndex = 23;
@@ -289,49 +293,59 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox1
             // 
-            textBox1.DataBindings.Add(new Binding("Text", coinBindingSource, "Country", true));
-            textBox1.Location = new Point(783, 69);
+            textBox1.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Country", true));
+            textBox1.Location = new Point(787, 69);
             textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
             textBox1.Size = new Size(164, 23);
             textBox1.TabIndex = 24;
             // 
+            // ownedCoinBindingSource
+            // 
+            ownedCoinBindingSource.DataSource = typeof(OwnedCoin);
+            // 
             // textBox2
             // 
-            textBox2.DataBindings.Add(new Binding("Text", coinBindingSource, "Par", true));
-            textBox2.Location = new Point(790, 100);
+            textBox2.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Par", true));
+            textBox2.Location = new Point(794, 100);
             textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
             textBox2.Size = new Size(157, 23);
             textBox2.TabIndex = 25;
             // 
             // textBox3
             // 
-            textBox3.DataBindings.Add(new Binding("Text", coinBindingSource, "YearOfGraduation", true));
-            textBox3.Location = new Point(800, 133);
+            textBox3.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "YearOfGraduation", true));
+            textBox3.Location = new Point(804, 133);
             textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
             textBox3.Size = new Size(147, 23);
             textBox3.TabIndex = 26;
             // 
             // textBox4
             // 
-            textBox4.DataBindings.Add(new Binding("Text", coinBindingSource, "Material", true));
-            textBox4.Location = new Point(786, 164);
+            textBox4.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Material", true));
+            textBox4.Location = new Point(790, 164);
             textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
             textBox4.Size = new Size(161, 23);
             textBox4.TabIndex = 27;
             // 
             // textBox5
             // 
-            textBox5.DataBindings.Add(new Binding("Text", coinBindingSource, "Amount", true));
-            textBox5.Location = new Point(888, 202);
+            textBox5.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Amount", true));
+            textBox5.Location = new Point(892, 202);
             textBox5.Name = "textBox5";
+            textBox5.ReadOnly = true;
             textBox5.Size = new Size(59, 23);
             textBox5.TabIndex = 28;
             // 
             // textBox6
             // 
-            textBox6.DataBindings.Add(new Binding("Text", coinBindingSource, "Features", true));
-            textBox6.Location = new Point(808, 235);
+            textBox6.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Features", true));
+            textBox6.Location = new Point(813, 235);
             textBox6.Name = "textBox6";
+            textBox6.ReadOnly = true;
             textBox6.Size = new Size(139, 23);
             textBox6.TabIndex = 29;
             // 
@@ -340,14 +354,10 @@ namespace dovidnyk_numizmata.Forms
             CollectionOfCollectorListBox.DataSource = ownedCoinBindingSource;
             CollectionOfCollectorListBox.DisplayMember = "Info";
             CollectionOfCollectorListBox.FormattingEnabled = true;
-            CollectionOfCollectorListBox.Location = new Point(961, 69);
+            CollectionOfCollectorListBox.Location = new Point(967, 69);
             CollectionOfCollectorListBox.Name = "CollectionOfCollectorListBox";
-            CollectionOfCollectorListBox.Size = new Size(465, 364);
+            CollectionOfCollectorListBox.Size = new Size(443, 364);
             CollectionOfCollectorListBox.TabIndex = 30;
-            // 
-            // ownedCoinBindingSource
-            // 
-            ownedCoinBindingSource.DataSource = typeof(OwnedCoin);
             // 
             // CollectionOfCollectorTitle
             // 
@@ -361,18 +371,19 @@ namespace dovidnyk_numizmata.Forms
             // 
             // searchingCollectionOfCollectorButton
             // 
-            searchingCollectionOfCollectorButton.Location = new Point(724, 286);
+            searchingCollectionOfCollectorButton.Location = new Point(735, 297);
             searchingCollectionOfCollectorButton.Name = "searchingCollectionOfCollectorButton";
             searchingCollectionOfCollectorButton.Size = new Size(75, 23);
             searchingCollectionOfCollectorButton.TabIndex = 32;
             searchingCollectionOfCollectorButton.Text = "Пошук";
             searchingCollectionOfCollectorButton.UseVisualStyleBackColor = true;
+            searchingCollectionOfCollectorButton.Click += searchingCollectionOfCollectorButton_Click;
             // 
             // searchingCollectionOfCollectorTextBox
             // 
-            searchingCollectionOfCollectorTextBox.Location = new Point(808, 285);
+            searchingCollectionOfCollectorTextBox.Location = new Point(824, 297);
             searchingCollectionOfCollectorTextBox.Name = "searchingCollectionOfCollectorTextBox";
-            searchingCollectionOfCollectorTextBox.Size = new Size(139, 23);
+            searchingCollectionOfCollectorTextBox.Size = new Size(129, 23);
             searchingCollectionOfCollectorTextBox.TabIndex = 33;
             // 
             // deleteCoinInCollectionOfCollectorButton
@@ -401,11 +412,51 @@ namespace dovidnyk_numizmata.Forms
             зберегтиToolStripMenuItem.Text = "Зберегти";
             зберегтиToolStripMenuItem.Click += зберегтиToolStripMenuItem_Click;
             // 
+            // remainingCoinsAllCoinsLabel
+            // 
+            remainingCoinsAllCoinsLabel.AutoSize = true;
+            remainingCoinsAllCoinsLabel.Location = new Point(27, 257);
+            remainingCoinsAllCoinsLabel.Name = "remainingCoinsAllCoinsLabel";
+            remainingCoinsAllCoinsLabel.Size = new Size(81, 15);
+            remainingCoinsAllCoinsLabel.TabIndex = 36;
+            remainingCoinsAllCoinsLabel.Text = "Залишилося:";
+            // 
+            // remainingCoinsAllCoinsTextBox
+            // 
+            remainingCoinsAllCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "RemainingCoins", true));
+            remainingCoinsAllCoinsTextBox.Location = new Point(117, 253);
+            remainingCoinsAllCoinsTextBox.Name = "remainingCoinsAllCoinsTextBox";
+            remainingCoinsAllCoinsTextBox.ReadOnly = true;
+            remainingCoinsAllCoinsTextBox.Size = new Size(139, 23);
+            remainingCoinsAllCoinsTextBox.TabIndex = 37;
+            // 
+            // remainingCoinsCollectionOfCollectorLabel
+            // 
+            remainingCoinsCollectionOfCollectorLabel.AutoSize = true;
+            remainingCoinsCollectionOfCollectorLabel.Location = new Point(730, 268);
+            remainingCoinsCollectionOfCollectorLabel.Name = "remainingCoinsCollectionOfCollectorLabel";
+            remainingCoinsCollectionOfCollectorLabel.Size = new Size(81, 15);
+            remainingCoinsCollectionOfCollectorLabel.TabIndex = 38;
+            remainingCoinsCollectionOfCollectorLabel.Text = "Залишилося:";
+            // 
+            // textBox7
+            // 
+            textBox7.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "RemainingCoins", true));
+            textBox7.Location = new Point(813, 265);
+            textBox7.Name = "textBox7";
+            textBox7.ReadOnly = true;
+            textBox7.Size = new Size(139, 23);
+            textBox7.TabIndex = 39;
+            // 
             // CollectionsOfCollectorsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1446, 450);
+            Controls.Add(textBox7);
+            Controls.Add(remainingCoinsCollectionOfCollectorLabel);
+            Controls.Add(remainingCoinsAllCoinsTextBox);
+            Controls.Add(remainingCoinsAllCoinsLabel);
             Controls.Add(deleteCoinInCollectionOfCollectorButton);
             Controls.Add(searchingCollectionOfCollectorTextBox);
             Controls.Add(searchingCollectionOfCollectorButton);
@@ -488,9 +539,13 @@ namespace dovidnyk_numizmata.Forms
         private Button searchingCollectionOfCollectorButton;
         private TextBox searchingCollectionOfCollectorTextBox;
         private Button deleteCoinInCollectionOfCollectorButton;
-        private BindingSource coinBindingSource;
-        private BindingSource ownedCoinBindingSource;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem зберегтиToolStripMenuItem;
+        private Label remainingCoinsAllCoinsLabel;
+        private TextBox remainingCoinsAllCoinsTextBox;
+        private Label remainingCoinsCollectionOfCollectorLabel;
+        private TextBox textBox7;
+        private BindingSource coinBindingSource;
+        private BindingSource ownedCoinBindingSource;
     }
 }

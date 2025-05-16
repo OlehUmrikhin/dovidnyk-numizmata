@@ -56,6 +56,8 @@ namespace dovidnyk_numizmata.Forms
             мояКолекціяToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             clearButton = new Button();
+            RemainingCoinsLabel = new Label();
+            remainingCoinsTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
@@ -134,6 +136,10 @@ namespace dovidnyk_numizmata.Forms
             countryCoinsTextBox.TabIndex = 7;
             countryCoinsTextBox.Text = " ";
             // 
+            // coinBindingSource
+            // 
+            coinBindingSource.DataSource = typeof(Coin);
+            // 
             // parCoinsTextBox
             // 
             parCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Par", true));
@@ -181,7 +187,7 @@ namespace dovidnyk_numizmata.Forms
             coinsListBox.DisplayMember = "Info";
             coinsListBox.Font = new Font("Segoe UI", 11F);
             coinsListBox.FormattingEnabled = true;
-            coinsListBox.Location = new Point(424, 69);
+            coinsListBox.Location = new Point(430, 70);
             coinsListBox.Name = "coinsListBox";
             coinsListBox.Size = new Size(660, 304);
             coinsListBox.TabIndex = 13;
@@ -276,12 +282,31 @@ namespace dovidnyk_numizmata.Forms
             clearButton.UseVisualStyleBackColor = true;
             clearButton.Click += clearButton_Click;
             // 
+            // RemainingCoinsLabel
+            // 
+            RemainingCoinsLabel.AutoSize = true;
+            RemainingCoinsLabel.Location = new Point(52, 280);
+            RemainingCoinsLabel.Name = "RemainingCoinsLabel";
+            RemainingCoinsLabel.Size = new Size(81, 15);
+            RemainingCoinsLabel.TabIndex = 20;
+            RemainingCoinsLabel.Text = "Залишилося:";
+            // 
+            // remainingCoinsTextBox
+            // 
+            remainingCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "RemainingCoins", true));
+            remainingCoinsTextBox.Location = new Point(141, 277);
+            remainingCoinsTextBox.Name = "remainingCoinsTextBox";
+            remainingCoinsTextBox.Size = new Size(242, 23);
+            remainingCoinsTextBox.TabIndex = 21;
+            // 
             // CoinsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1114, 450);
+            Controls.Add(remainingCoinsTextBox);
+            Controls.Add(RemainingCoinsLabel);
             Controls.Add(panel1);
             Controls.Add(coinsListBox);
             Controls.Add(featuresCoinsTextBox);
@@ -334,8 +359,10 @@ namespace dovidnyk_numizmata.Forms
         private ToolStripMenuItem зберігтиToolStripMenuItem;
         private Panel panel1;
         private Button clearButton;
-        private BindingSource coinBindingSource;
         private ToolStripMenuItem колекціонериToolStripMenuItem;
         private ToolStripMenuItem мояКолекціяToolStripMenuItem;
+        private Label RemainingCoinsLabel;
+        private TextBox remainingCoinsTextBox;
+        private BindingSource coinBindingSource;
     }
 }

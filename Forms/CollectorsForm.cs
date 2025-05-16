@@ -71,19 +71,20 @@ namespace dovidnyk_numizmata
         {
             if (collectorListBox.SelectedItem is Collector collectorToRemove)
             {
-                if (isSearchActive)
+                if (!collectorToRemove.Id.Equals(Guid.Parse(AppState.MyId)))
                 {
-                    AppState.CollectorsList.Remove(collectorToRemove);
-                    isEdit = true;
+                    if (isSearchActive)
+                    {
+                        AppState.CollectorsList.Remove(collectorToRemove);
+                        isEdit = true;
+                    }
+                    else
+                    {
+                        AppState.CollectorsList.Remove(collectorToRemove);
+                        isEdit = true;
+                    }
+                    collectorBindingSource.ResetBindings(false);
                 }
-                else
-                {
-                    AppState.CollectorsList.Remove(collectorToRemove);
-                    isEdit = true;
-                }
-                collectorBindingSource.ResetBindings(false);
-                //deleteButton.Enabled = false;
-                //coinsListBox.SelectedIndex = -1;
             }
         }
 
@@ -173,6 +174,7 @@ namespace dovidnyk_numizmata
             if (collectionsOfCollectorsForm == null || collectionsOfCollectorsForm.IsDisposed)
             {
                 var selectedCollector = collectorListBox.SelectedItem as Collector;
+                var me = AppState.CollectorsList.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
                 if (selectedCollector != null)
                 {
                     collectionsOfCollectorsForm = new CollectionsOfCollectorsForm(selectedCollector);
