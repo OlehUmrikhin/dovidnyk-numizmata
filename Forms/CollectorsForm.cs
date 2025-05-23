@@ -16,13 +16,14 @@ namespace dovidnyk_numizmata
     public partial class CollectorsForm : Form
     {
         private CoinsForm coinsForm;
-        private CollectionsOfCollectorsForm collectionsOfCollectorsForm;
         private bool isSearchActive = false;
-        private bool isEdit = false;
         public CollectorsForm()
         {
             InitializeComponent();
             collectorBindingSource.DataSource = AppState.CollectorsList;
+
+            //AppState.TestDataCollectors();
+            //collectorBindingSource.ResetBindings(true);
         }
 
         private void наГоловнуToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,20 +51,29 @@ namespace dovidnyk_numizmata
 
         private void addCollectorButton_Click(object sender, EventArgs e)
         {
-            string country = countryCollectorTextBox.Text;
-            string name = nameCollectorTextBox.Text;
             string contacts = contactsCollectorTextBox.Text;
 
-            Collector newCollector = new Collector(country, name, contacts);
-            if (!string.IsNullOrEmpty(newCollector.Country) && !string.IsNullOrEmpty(newCollector.Name) && !string.IsNullOrEmpty(newCollector.Contacts))
+            if (!(int.TryParse(nameCollectorTextBox.Text, out int nameInt)) && !(int.TryParse(countryCollectorTextBox.Text, out int countryInt)))
             {
-                AppState.CollectorsList.Add(newCollector);
-                isEdit = true;
-                collectorBindingSource.ResetBindings(true);
+                string name = nameCollectorTextBox.Text;
+                string country = countryCollectorTextBox.Text;
+                Collector newCollector = new Collector(country, name, contacts);
+
+                if (!string.IsNullOrEmpty(newCollector.Country) && !string.IsNullOrEmpty(newCollector.Name) && !string.IsNullOrEmpty(newCollector.Contacts))
+                {
+                    AppState.CollectorsList.Add(newCollector);
+                    AppState.isEdit = true;
+                    collectorBindingSource.ResetBindings(true);
+                }
+                else
+                {
+                    MessageBox.Show("Введіть всі поля!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
             else
             {
-                MessageBox.Show("Введіть всі поля!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Заповніть всі поля коректно", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -76,12 +86,12 @@ namespace dovidnyk_numizmata
                     if (isSearchActive)
                     {
                         AppState.CollectorsList.Remove(collectorToRemove);
-                        isEdit = true;
+                        AppState.isEdit = true;
                     }
                     else
                     {
                         AppState.CollectorsList.Remove(collectorToRemove);
-                        isEdit = true;
+                        AppState.isEdit = true;
                     }
                     collectorBindingSource.ResetBindings(false);
                 }
@@ -163,24 +173,38 @@ namespace dovidnyk_numizmata
 
         private void зберегтиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string jsonString = JsonSerializer.Serialize(AppState.CollectorsList);
-            File.WriteAllText("collectors.txt", jsonString);
+            string jsonStringCoinsList = JsonSerializer.Serialize(AppState.CoinsList);
+            string jsonStringCollectorList = JsonSerializer.Serialize(AppState.CollectorsList);
+            File.WriteAllText("coins.txt", jsonStringCoinsList);
+            File.WriteAllText("collectors.txt", jsonStringCollectorList);
             MessageBox.Show("Дані збережені!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            isEdit = false;
+            AppState.isEdit = false;
         }
 
         private void lookCollectionOfCollectorButton_Click(object sender, EventArgs e)
         {
-            if (collectionsOfCollectorsForm == null || collectionsOfCollectorsForm.IsDisposed)
+            if (AppState.collectionsOfCollectorsForm == null || AppState.collectionsOfCollectorsForm.IsDisposed)
             {
                 var selectedCollector = collectorListBox.SelectedItem as Collector;
                 var me = AppState.CollectorsList.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
-                if (selectedCollector != null)
+                if (selectedCollector != null && selectedCollector != me)
                 {
-                    collectionsOfCollectorsForm = new CollectionsOfCollectorsForm(selectedCollector);
-                    collectionsOfCollectorsForm.Show();
+                    AppState.collectionsOfCollectorsForm = new CollectionsOfCollectorsForm(selectedCollector);
+                    AppState.collectionsOfCollectorsForm.Show();
+                }
+                else if (selectedCollector == me) 
+                {
+                    if (AppState.collectionOfCollectorsForm == null || AppState.collectionOfCollectorsForm.IsDisposed)
+                    {
+                        if (me != null)
+                        {
+                            AppState.collectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
+                            AppState.collectionOfCollectorsForm.Show();
+                        }
+                    }
                 }
             }
+            
         }
     }
 }

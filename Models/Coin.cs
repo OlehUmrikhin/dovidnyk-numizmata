@@ -58,25 +58,5 @@ namespace dovidnyk_numizmata.Models
         {
             return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Amount}  |  Залишилося: {RemainingCoins}  |  Особливості: {Features}";
         }
-
-        public bool Equals(Coin other)
-        {
-            if (other == null)
-                return false;
-
-            return Country == other.Country &&
-                   Par == other.Par &&
-                   YearOfGraduation == other.YearOfGraduation &&
-                   Material == other.Material &&
-                   Amount == other.Amount &&
-                   Features == other.Features;
-                   RemainingCoins = other.RemainingCoins;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Coin);
-        }
-
     }
 }

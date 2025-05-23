@@ -293,7 +293,6 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox1
             // 
-            textBox1.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Country", true));
             textBox1.Location = new Point(787, 69);
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
@@ -306,7 +305,6 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox2
             // 
-            textBox2.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Par", true));
             textBox2.Location = new Point(794, 100);
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
@@ -315,7 +313,6 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox3
             // 
-            textBox3.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "YearOfGraduation", true));
             textBox3.Location = new Point(804, 133);
             textBox3.Name = "textBox3";
             textBox3.ReadOnly = true;
@@ -324,7 +321,6 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox4
             // 
-            textBox4.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Material", true));
             textBox4.Location = new Point(790, 164);
             textBox4.Name = "textBox4";
             textBox4.ReadOnly = true;
@@ -333,7 +329,6 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox5
             // 
-            textBox5.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Amount", true));
             textBox5.Location = new Point(892, 202);
             textBox5.Name = "textBox5";
             textBox5.ReadOnly = true;
@@ -342,7 +337,6 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox6
             // 
-            textBox6.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "Features", true));
             textBox6.Location = new Point(813, 235);
             textBox6.Name = "textBox6";
             textBox6.ReadOnly = true;
@@ -441,7 +435,6 @@ namespace dovidnyk_numizmata.Forms
             // 
             // textBox7
             // 
-            textBox7.DataBindings.Add(new Binding("Text", ownedCoinBindingSource, "RemainingCoins", true));
             textBox7.Location = new Point(813, 265);
             textBox7.Name = "textBox7";
             textBox7.ReadOnly = true;
@@ -546,6 +539,6 @@ namespace dovidnyk_numizmata.Forms
         private Label remainingCoinsCollectionOfCollectorLabel;
         private TextBox textBox7;
         private BindingSource coinBindingSource;
-        private BindingSource ownedCoinBindingSource;
+        public BindingSource ownedCoinBindingSource;
     }
 }

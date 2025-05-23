@@ -189,8 +189,8 @@ namespace dovidnyk_numizmata.Forms
             coinsListBox.FormattingEnabled = true;
             coinsListBox.Location = new Point(430, 70);
             coinsListBox.Name = "coinsListBox";
-            coinsListBox.Size = new Size(660, 304);
-            coinsListBox.TabIndex = 13;
+            coinsListBox.Size = new Size(686, 404);
+            coinsListBox.TabIndex = 18;
             coinsListBox.SelectedIndexChanged += coinsListBox_SelectedIndexChanged;
             // 
             // addButton
@@ -219,7 +219,7 @@ namespace dovidnyk_numizmata.Forms
             searchButton.Location = new Point(174, 10);
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(75, 50);
-            searchButton.TabIndex = 17;
+            searchButton.TabIndex = 16;
             searchButton.Text = "Пошук";
             searchButton.UseVisualStyleBackColor = true;
             searchButton.Click += searchButton_Click;
@@ -229,7 +229,7 @@ namespace dovidnyk_numizmata.Forms
             menuStrip1.Items.AddRange(new ToolStripItem[] { закритиToolStripMenuItem, зберігтиToolStripMenuItem, колекціонериToolStripMenuItem, мояКолекціяToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1114, 24);
+            menuStrip1.Size = new Size(1140, 24);
             menuStrip1.TabIndex = 18;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -245,7 +245,7 @@ namespace dovidnyk_numizmata.Forms
             зберігтиToolStripMenuItem.Name = "зберігтиToolStripMenuItem";
             зберігтиToolStripMenuItem.Size = new Size(69, 20);
             зберігтиToolStripMenuItem.Text = "Зберегти";
-            зберігтиToolStripMenuItem.Click += зберігтиToolStripMenuItem_Click;
+            зберігтиToolStripMenuItem.Click += зберегтиToolStripMenuItem_Click;
             // 
             // колекціонериToolStripMenuItem
             // 
@@ -277,7 +277,7 @@ namespace dovidnyk_numizmata.Forms
             clearButton.Location = new Point(268, 10);
             clearButton.Name = "clearButton";
             clearButton.Size = new Size(68, 50);
-            clearButton.TabIndex = 18;
+            clearButton.TabIndex = 17;
             clearButton.Text = "Очистити поля";
             clearButton.UseVisualStyleBackColor = true;
             clearButton.Click += clearButton_Click;
@@ -297,14 +297,14 @@ namespace dovidnyk_numizmata.Forms
             remainingCoinsTextBox.Location = new Point(141, 277);
             remainingCoinsTextBox.Name = "remainingCoinsTextBox";
             remainingCoinsTextBox.Size = new Size(242, 23);
-            remainingCoinsTextBox.TabIndex = 21;
+            remainingCoinsTextBox.TabIndex = 13;
             // 
             // CoinsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1114, 450);
+            ClientSize = new Size(1140, 552);
             Controls.Add(remainingCoinsTextBox);
             Controls.Add(RemainingCoinsLabel);
             Controls.Add(panel1);
@@ -324,8 +324,10 @@ namespace dovidnyk_numizmata.Forms
             Controls.Add(titleCoinsLabel);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            MinimumSize = new Size(1156, 591);
             Name = "CoinsForm";
             Text = "CoinsForm";
+            FormClosing += CoinsForm_FormClosing;
             Click += CoinsForm_Click;
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);

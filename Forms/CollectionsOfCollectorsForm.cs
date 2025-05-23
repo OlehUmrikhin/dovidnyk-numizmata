@@ -19,16 +19,23 @@ namespace dovidnyk_numizmata.Forms
 
 
         private bool isSearchActive = false;
-        private bool isEdit = false;
         private Collector CurrentСollectioner;
         public CollectionsOfCollectorsForm(Collector collectioner)
         {
             InitializeComponent();
+
+
             this.CurrentСollectioner = collectioner;
             coinBindingSource.DataSource = AppState.CoinsList;
             ownedCoinBindingSource.DataSource = collectioner.CoinsCollection;
+            textBox1.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Country");
+            textBox2.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Par");
+            textBox3.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.YearOfGraduation");
+            textBox4.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Material");
+            textBox5.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Amount");
+            textBox6.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Features");
+            textBox7.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.RemainingCoins");
         }
-
 
         private void searchingAllCoinsButton_Click(object sender, EventArgs e)
         {
@@ -61,19 +68,22 @@ namespace dovidnyk_numizmata.Forms
             if (selectedCoin != null && selectedCoin.RemainingCoins > 0)
             {
                 selectedCoin.RemainingCoins--;
+
                 this.CurrentСollectioner.CollectCoin(selectedCoin, "new");
                 ownedCoinBindingSource.ResetBindings(true);
                 coinBindingSource.ResetBindings(true);
-                isEdit = true;
+                AppState.isEdit = true;
             }
         }
 
         private void зберегтиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string jsonString = JsonSerializer.Serialize(AppState.CollectorsList);
-            File.WriteAllText("collectors.txt", jsonString);
+            string jsonStringCoinsList = JsonSerializer.Serialize(AppState.CoinsList);
+            string jsonStringCollectorList = JsonSerializer.Serialize(AppState.CollectorsList);
+            File.WriteAllText("coins.txt", jsonStringCoinsList);
+            File.WriteAllText("collectors.txt", jsonStringCollectorList);
             MessageBox.Show("Дані збережені!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            isEdit = false;
+            AppState.isEdit = false;
         }
 
         private void deleteCoinInCollectionOfCollectorButton_Click(object sender, EventArgs e)
@@ -84,7 +94,7 @@ namespace dovidnyk_numizmata.Forms
                 this.CurrentСollectioner.DeCollectCoin(selectedCoin);
                 ownedCoinBindingSource.ResetBindings(true);
                 coinBindingSource.ResetBindings(true);
-                isEdit = true;
+                AppState.isEdit = true;
             }
         }
 
