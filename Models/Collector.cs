@@ -43,6 +43,18 @@ namespace dovidnyk_numizmata.Models
         public void DeCollectCoin(OwnedCoin ownedCoin) 
         {
             CoinsCollection.Remove(ownedCoin);
-        } 
+        }
+
+        public bool IsIdentical(Collector otherCollector)
+        {
+            if (otherCollector == null)
+            {
+                return false;
+            }
+
+            return this.Country == otherCollector.Country &&
+                   this.Name == otherCollector.Name &&
+                   this.Contacts == otherCollector.Contacts;
+        }
     }
 }

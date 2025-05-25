@@ -32,34 +32,37 @@ namespace dovidnyk_numizmata
         {
             components = new System.ComponentModel.Container();
             titleCollectorsLabel = new Label();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             menuStrip1 = new MenuStrip();
-            наГоловнуToolStripMenuItem = new ToolStripMenuItem();
             монетиToolStripMenuItem = new ToolStripMenuItem();
             колекціонериToolStripMenuItem = new ToolStripMenuItem();
             зберегтиToolStripMenuItem = new ToolStripMenuItem();
-            countryCollectorLabel = new Label();
-            nameCollectorLabel = new Label();
-            contactsCollectorLabel = new Label();
-            countryCollectorTextBox = new TextBox();
+            countryCollectorLabelMain = new Label();
+            nameCollectorLabelMain = new Label();
+            contactsCollectorLabelMain = new Label();
+            countryCollectorTextBoxMain = new TextBox();
             collectorBindingSource = new BindingSource(components);
-            nameCollectorTextBox = new TextBox();
-            contactsCollectorTextBox = new TextBox();
-            collectorListBox = new ListBox();
-            addCollectorButton = new Button();
+            nameCollectorTextBoxMain = new TextBox();
+            contactsCollectorTextBoxMain = new TextBox();
+            addCollectorButtonMain = new Button();
             lookCollectionOfCollectorButton = new Button();
-            searchCollectorButton = new Button();
             searchCollectorTextBox = new TextBox();
             deleteCollectorButton = new Button();
+            collectorsDataGridView = new DataGridView();
+            countryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            contactsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            searchingTitle = new Label();
+            editingTitleMain = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)collectorBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)collectorsDataGridView).BeginInit();
             SuspendLayout();
             // 
             // titleCollectorsLabel
             // 
             titleCollectorsLabel.AutoSize = true;
             titleCollectorsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            titleCollectorsLabel.Location = new Point(295, 41);
+            titleCollectorsLabel.Location = new Point(387, 43);
             titleCollectorsLabel.Name = "titleCollectorsLabel";
             titleCollectorsLabel.Size = new Size(239, 21);
             titleCollectorsLabel.TabIndex = 0;
@@ -67,25 +70,19 @@ namespace dovidnyk_numizmata
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { наГоловнуToolStripMenuItem, монетиToolStripMenuItem, колекціонериToolStripMenuItem, зберегтиToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { монетиToolStripMenuItem, колекціонериToolStripMenuItem, зберегтиToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(955, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
-            // 
-            // наГоловнуToolStripMenuItem
-            // 
-            наГоловнуToolStripMenuItem.Name = "наГоловнуToolStripMenuItem";
-            наГоловнуToolStripMenuItem.Size = new Size(82, 20);
-            наГоловнуToolStripMenuItem.Text = "На головну";
-            наГоловнуToolStripMenuItem.Click += наГоловнуToolStripMenuItem_Click;
             // 
             // монетиToolStripMenuItem
             // 
             монетиToolStripMenuItem.Name = "монетиToolStripMenuItem";
             монетиToolStripMenuItem.Size = new Size(62, 20);
             монетиToolStripMenuItem.Text = "Монети";
+            монетиToolStripMenuItem.Click += монетиToolStripMenuItem_Click;
             // 
             // колекціонериToolStripMenuItem
             // 
@@ -100,146 +97,185 @@ namespace dovidnyk_numizmata
             зберегтиToolStripMenuItem.Text = "Зберегти";
             зберегтиToolStripMenuItem.Click += зберегтиToolStripMenuItem_Click;
             // 
-            // countryCollectorLabel
+            // countryCollectorLabelMain
             // 
-            countryCollectorLabel.AutoSize = true;
-            countryCollectorLabel.Location = new Point(24, 107);
-            countryCollectorLabel.Name = "countryCollectorLabel";
-            countryCollectorLabel.Size = new Size(46, 15);
-            countryCollectorLabel.TabIndex = 2;
-            countryCollectorLabel.Text = "Країна:";
+            countryCollectorLabelMain.AutoSize = true;
+            countryCollectorLabelMain.Location = new Point(659, 183);
+            countryCollectorLabelMain.Name = "countryCollectorLabelMain";
+            countryCollectorLabelMain.Size = new Size(46, 15);
+            countryCollectorLabelMain.TabIndex = 2;
+            countryCollectorLabelMain.Text = "Країна:";
             // 
-            // nameCollectorLabel
+            // nameCollectorLabelMain
             // 
-            nameCollectorLabel.AutoSize = true;
-            nameCollectorLabel.Location = new Point(24, 141);
-            nameCollectorLabel.Name = "nameCollectorLabel";
-            nameCollectorLabel.Size = new Size(31, 15);
-            nameCollectorLabel.TabIndex = 3;
-            nameCollectorLabel.Text = "Ім'я:";
+            nameCollectorLabelMain.AutoSize = true;
+            nameCollectorLabelMain.Location = new Point(659, 217);
+            nameCollectorLabelMain.Name = "nameCollectorLabelMain";
+            nameCollectorLabelMain.Size = new Size(31, 15);
+            nameCollectorLabelMain.TabIndex = 3;
+            nameCollectorLabelMain.Text = "Ім'я:";
             // 
-            // contactsCollectorLabel
+            // contactsCollectorLabelMain
             // 
-            contactsCollectorLabel.AutoSize = true;
-            contactsCollectorLabel.Location = new Point(24, 172);
-            contactsCollectorLabel.Name = "contactsCollectorLabel";
-            contactsCollectorLabel.Size = new Size(88, 15);
-            contactsCollectorLabel.TabIndex = 4;
-            contactsCollectorLabel.Text = "Контактні дані:";
+            contactsCollectorLabelMain.AutoSize = true;
+            contactsCollectorLabelMain.Location = new Point(659, 248);
+            contactsCollectorLabelMain.Name = "contactsCollectorLabelMain";
+            contactsCollectorLabelMain.Size = new Size(88, 15);
+            contactsCollectorLabelMain.TabIndex = 4;
+            contactsCollectorLabelMain.Text = "Контактні дані:";
             // 
-            // countryCollectorTextBox
+            // countryCollectorTextBoxMain
             // 
-            countryCollectorTextBox.DataBindings.Add(new Binding("Text", collectorBindingSource, "Country", true));
-            countryCollectorTextBox.Location = new Point(80, 104);
-            countryCollectorTextBox.Name = "countryCollectorTextBox";
-            countryCollectorTextBox.Size = new Size(202, 23);
-            countryCollectorTextBox.TabIndex = 5;
+            countryCollectorTextBoxMain.DataBindings.Add(new Binding("Text", collectorBindingSource, "Country", true));
+            countryCollectorTextBoxMain.Location = new Point(715, 180);
+            countryCollectorTextBoxMain.Name = "countryCollectorTextBoxMain";
+            countryCollectorTextBoxMain.Size = new Size(202, 23);
+            countryCollectorTextBoxMain.TabIndex = 5;
             // 
             // collectorBindingSource
             // 
             collectorBindingSource.DataSource = typeof(Collector);
             // 
-            // nameCollectorTextBox
+            // nameCollectorTextBoxMain
             // 
-            nameCollectorTextBox.DataBindings.Add(new Binding("Text", collectorBindingSource, "Name", true));
-            nameCollectorTextBox.Location = new Point(59, 136);
-            nameCollectorTextBox.Name = "nameCollectorTextBox";
-            nameCollectorTextBox.Size = new Size(223, 23);
-            nameCollectorTextBox.TabIndex = 6;
+            nameCollectorTextBoxMain.DataBindings.Add(new Binding("Text", collectorBindingSource, "Name", true));
+            nameCollectorTextBoxMain.Location = new Point(694, 212);
+            nameCollectorTextBoxMain.Name = "nameCollectorTextBoxMain";
+            nameCollectorTextBoxMain.Size = new Size(223, 23);
+            nameCollectorTextBoxMain.TabIndex = 6;
             // 
-            // contactsCollectorTextBox
+            // contactsCollectorTextBoxMain
             // 
-            contactsCollectorTextBox.DataBindings.Add(new Binding("Text", collectorBindingSource, "Contacts", true));
-            contactsCollectorTextBox.Location = new Point(121, 168);
-            contactsCollectorTextBox.Name = "contactsCollectorTextBox";
-            contactsCollectorTextBox.Size = new Size(161, 23);
-            contactsCollectorTextBox.TabIndex = 7;
+            contactsCollectorTextBoxMain.DataBindings.Add(new Binding("Text", collectorBindingSource, "Contacts", true));
+            contactsCollectorTextBoxMain.Location = new Point(756, 244);
+            contactsCollectorTextBoxMain.Name = "contactsCollectorTextBoxMain";
+            contactsCollectorTextBoxMain.Size = new Size(161, 23);
+            contactsCollectorTextBoxMain.TabIndex = 7;
             // 
-            // collectorListBox
+            // addCollectorButtonMain
             // 
-            collectorListBox.DataSource = collectorBindingSource;
-            collectorListBox.DisplayMember = "Info";
-            collectorListBox.Font = new Font("Segoe UI", 11F);
-            collectorListBox.FormattingEnabled = true;
-            collectorListBox.Location = new Point(312, 102);
-            collectorListBox.Name = "collectorListBox";
-            collectorListBox.Size = new Size(458, 284);
-            collectorListBox.TabIndex = 8;
-            collectorListBox.SelectedIndexChanged += collectorsListBox_SelectedIndexChanged;
-            // 
-            // addCollectorButton
-            // 
-            addCollectorButton.Location = new Point(107, 343);
-            addCollectorButton.Name = "addCollectorButton";
-            addCollectorButton.Size = new Size(90, 56);
-            addCollectorButton.TabIndex = 9;
-            addCollectorButton.Text = "Додати колекціонера";
-            addCollectorButton.UseVisualStyleBackColor = true;
-            addCollectorButton.Click += addCollectorButton_Click;
+            addCollectorButtonMain.Location = new Point(745, 375);
+            addCollectorButtonMain.Name = "addCollectorButtonMain";
+            addCollectorButtonMain.Size = new Size(96, 57);
+            addCollectorButtonMain.TabIndex = 9;
+            addCollectorButtonMain.Text = "Додати колекціонера";
+            addCollectorButtonMain.UseVisualStyleBackColor = true;
+            addCollectorButtonMain.Click += addCollectorButton_Click;
             // 
             // lookCollectionOfCollectorButton
             // 
-            lookCollectionOfCollectorButton.Location = new Point(16, 343);
+            lookCollectionOfCollectorButton.Location = new Point(643, 375);
             lookCollectionOfCollectorButton.Name = "lookCollectionOfCollectorButton";
-            lookCollectionOfCollectorButton.Size = new Size(75, 56);
-            lookCollectionOfCollectorButton.TabIndex = 10;
+            lookCollectionOfCollectorButton.Size = new Size(96, 57);
+            lookCollectionOfCollectorButton.TabIndex = 8;
             lookCollectionOfCollectorButton.Text = "Подивитись колекцію";
             lookCollectionOfCollectorButton.UseVisualStyleBackColor = true;
             lookCollectionOfCollectorButton.Click += lookCollectionOfCollectorButton_Click;
             // 
-            // searchCollectorButton
-            // 
-            searchCollectorButton.Location = new Point(24, 214);
-            searchCollectorButton.Name = "searchCollectorButton";
-            searchCollectorButton.Size = new Size(75, 23);
-            searchCollectorButton.TabIndex = 11;
-            searchCollectorButton.Text = "Пошук";
-            searchCollectorButton.UseVisualStyleBackColor = true;
-            searchCollectorButton.Click += searchCollectorButton_Click;
-            // 
             // searchCollectorTextBox
             // 
-            searchCollectorTextBox.Location = new Point(105, 214);
+            searchCollectorTextBox.Location = new Point(88, 85);
             searchCollectorTextBox.Name = "searchCollectorTextBox";
             searchCollectorTextBox.Size = new Size(177, 23);
-            searchCollectorTextBox.TabIndex = 12;
+            searchCollectorTextBox.TabIndex = 11;
+            searchCollectorTextBox.TextChanged += searchCollectorTextBox_TextChanged;
             // 
             // deleteCollectorButton
             // 
-            deleteCollectorButton.Location = new Point(214, 342);
+            deleteCollectorButton.Location = new Point(847, 375);
             deleteCollectorButton.Name = "deleteCollectorButton";
-            deleteCollectorButton.Size = new Size(75, 57);
-            deleteCollectorButton.TabIndex = 13;
+            deleteCollectorButton.Size = new Size(96, 57);
+            deleteCollectorButton.TabIndex = 10;
             deleteCollectorButton.Text = "Видалити колекціонера";
             deleteCollectorButton.UseVisualStyleBackColor = true;
             deleteCollectorButton.Click += deleteCollectorButton_Click;
+            // 
+            // collectorsDataGridView
+            // 
+            collectorsDataGridView.AllowUserToAddRows = false;
+            collectorsDataGridView.AllowUserToDeleteRows = false;
+            collectorsDataGridView.AllowUserToResizeRows = false;
+            collectorsDataGridView.AutoGenerateColumns = false;
+            collectorsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            collectorsDataGridView.Columns.AddRange(new DataGridViewColumn[] { countryDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, contactsDataGridViewTextBoxColumn });
+            collectorsDataGridView.DataSource = collectorBindingSource;
+            collectorsDataGridView.Location = new Point(12, 121);
+            collectorsDataGridView.MultiSelect = false;
+            collectorsDataGridView.Name = "collectorsDataGridView";
+            collectorsDataGridView.ReadOnly = true;
+            collectorsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            collectorsDataGridView.Size = new Size(614, 404);
+            collectorsDataGridView.TabIndex = 14;
+            // 
+            // countryDataGridViewTextBoxColumn
+            // 
+            countryDataGridViewTextBoxColumn.DataPropertyName = "Country";
+            countryDataGridViewTextBoxColumn.HeaderText = "Країна";
+            countryDataGridViewTextBoxColumn.Name = "countryDataGridViewTextBoxColumn";
+            countryDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Ім'я";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            nameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // contactsDataGridViewTextBoxColumn
+            // 
+            contactsDataGridViewTextBoxColumn.DataPropertyName = "Contacts";
+            contactsDataGridViewTextBoxColumn.HeaderText = "Контактні дані";
+            contactsDataGridViewTextBoxColumn.Name = "contactsDataGridViewTextBoxColumn";
+            contactsDataGridViewTextBoxColumn.ReadOnly = true;
+            contactsDataGridViewTextBoxColumn.Width = 300;
+            // 
+            // searchingTitle
+            // 
+            searchingTitle.AutoSize = true;
+            searchingTitle.Location = new Point(36, 88);
+            searchingTitle.Name = "searchingTitle";
+            searchingTitle.Size = new Size(46, 15);
+            searchingTitle.TabIndex = 15;
+            searchingTitle.Text = "Пошук";
+            // 
+            // editingTitleMain
+            // 
+            editingTitleMain.AutoSize = true;
+            editingTitleMain.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            editingTitleMain.Location = new Point(694, 137);
+            editingTitleMain.Name = "editingTitleMain";
+            editingTitleMain.Size = new Size(204, 20);
+            editingTitleMain.TabIndex = 16;
+            editingTitleMain.Text = "Редагування колекціонера";
             // 
             // CollectorsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(955, 545);
+            Controls.Add(editingTitleMain);
+            Controls.Add(searchingTitle);
+            Controls.Add(collectorsDataGridView);
             Controls.Add(deleteCollectorButton);
             Controls.Add(searchCollectorTextBox);
-            Controls.Add(searchCollectorButton);
             Controls.Add(lookCollectionOfCollectorButton);
-            Controls.Add(addCollectorButton);
-            Controls.Add(collectorListBox);
-            Controls.Add(contactsCollectorTextBox);
-            Controls.Add(nameCollectorTextBox);
-            Controls.Add(countryCollectorTextBox);
-            Controls.Add(contactsCollectorLabel);
-            Controls.Add(nameCollectorLabel);
-            Controls.Add(countryCollectorLabel);
+            Controls.Add(addCollectorButtonMain);
+            Controls.Add(contactsCollectorTextBoxMain);
+            Controls.Add(nameCollectorTextBoxMain);
+            Controls.Add(countryCollectorTextBoxMain);
+            Controls.Add(contactsCollectorLabelMain);
+            Controls.Add(nameCollectorLabelMain);
+            Controls.Add(countryCollectorLabelMain);
             Controls.Add(titleCollectorsLabel);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "CollectorsForm";
             Text = "CollectorsForm";
-            Click += CollectorsForm_Click;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)collectorBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)collectorsDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -247,24 +283,26 @@ namespace dovidnyk_numizmata
         #endregion
 
         private Label titleCollectorsLabel;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem наГоловнуToolStripMenuItem;
         private ToolStripMenuItem монетиToolStripMenuItem;
         private ToolStripMenuItem колекціонериToolStripMenuItem;
-        private Label countryCollectorLabel;
-        private Label nameCollectorLabel;
-        private Label contactsCollectorLabel;
-        private TextBox countryCollectorTextBox;
-        private TextBox nameCollectorTextBox;
-        private TextBox contactsCollectorTextBox;
-        private ListBox collectorListBox;
-        private Button addCollectorButton;
+        private Label countryCollectorLabelMain;
+        private Label nameCollectorLabelMain;
+        private Label contactsCollectorLabelMain;
+        private TextBox countryCollectorTextBoxMain;
+        private TextBox nameCollectorTextBoxMain;
+        private TextBox contactsCollectorTextBoxMain;
+        private Button addCollectorButtonMain;
         private Button lookCollectionOfCollectorButton;
-        private Button searchCollectorButton;
         private TextBox searchCollectorTextBox;
         private Button deleteCollectorButton;
-        private BindingSource collectorBindingSource;
         private ToolStripMenuItem зберегтиToolStripMenuItem;
+        private BindingSource collectorBindingSource;
+        private DataGridView collectorsDataGridView;
+        private DataGridViewTextBoxColumn countryDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn contactsDataGridViewTextBoxColumn;
+        private Label searchingTitle;
+        private Label editingTitleMain;
     }
 }

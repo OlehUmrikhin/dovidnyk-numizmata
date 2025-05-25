@@ -45,29 +45,38 @@ namespace dovidnyk_numizmata.Forms
             materialCoinsTextBox = new TextBox();
             numberCoinsTextBox = new TextBox();
             featuresCoinsTextBox = new TextBox();
-            coinsListBox = new ListBox();
             addButton = new Button();
             deleteButton = new Button();
-            searchButton = new Button();
             menuStrip1 = new MenuStrip();
             закритиToolStripMenuItem = new ToolStripMenuItem();
             зберігтиToolStripMenuItem = new ToolStripMenuItem();
             колекціонериToolStripMenuItem = new ToolStripMenuItem();
             мояКолекціяToolStripMenuItem = new ToolStripMenuItem();
-            panel1 = new Panel();
-            clearButton = new Button();
             RemainingCoinsLabel = new Label();
             remainingCoinsTextBox = new TextBox();
+            collectionOfCoinsDataGridView = new DataGridView();
+            panel2 = new Panel();
+            editLabel = new Label();
+            searchingTitle = new Label();
+            searchingTextBox = new TextBox();
+            countryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            parDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            yearOfGraduationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            materialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            amountDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            featuresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            remainingCoinsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            IsRare = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
-            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)collectionOfCoinsDataGridView).BeginInit();
             SuspendLayout();
             // 
             // titleCoinsLabel
             // 
             titleCoinsLabel.AutoSize = true;
             titleCoinsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            titleCoinsLabel.Location = new Point(492, 28);
+            titleCoinsLabel.Location = new Point(631, 28);
             titleCoinsLabel.Name = "titleCoinsLabel";
             titleCoinsLabel.Size = new Size(186, 21);
             titleCoinsLabel.TabIndex = 0;
@@ -76,7 +85,7 @@ namespace dovidnyk_numizmata.Forms
             // countryCoinsLabel
             // 
             countryCoinsLabel.AutoSize = true;
-            countryCoinsLabel.Location = new Point(52, 70);
+            countryCoinsLabel.Location = new Point(1061, 170);
             countryCoinsLabel.Name = "countryCoinsLabel";
             countryCoinsLabel.Size = new Size(46, 15);
             countryCoinsLabel.TabIndex = 1;
@@ -85,7 +94,7 @@ namespace dovidnyk_numizmata.Forms
             // parCoinsLabel
             // 
             parCoinsLabel.AutoSize = true;
-            parCoinsLabel.Location = new Point(52, 105);
+            parCoinsLabel.Location = new Point(1061, 205);
             parCoinsLabel.Name = "parCoinsLabel";
             parCoinsLabel.Size = new Size(58, 15);
             parCoinsLabel.TabIndex = 2;
@@ -94,7 +103,7 @@ namespace dovidnyk_numizmata.Forms
             // yearOfGraduationCoinsLabel
             // 
             yearOfGraduationCoinsLabel.AutoSize = true;
-            yearOfGraduationCoinsLabel.Location = new Point(52, 140);
+            yearOfGraduationCoinsLabel.Location = new Point(1061, 240);
             yearOfGraduationCoinsLabel.Name = "yearOfGraduationCoinsLabel";
             yearOfGraduationCoinsLabel.Size = new Size(73, 15);
             yearOfGraduationCoinsLabel.TabIndex = 3;
@@ -103,7 +112,7 @@ namespace dovidnyk_numizmata.Forms
             // MaterialCoinsLabel
             // 
             MaterialCoinsLabel.AutoSize = true;
-            MaterialCoinsLabel.Location = new Point(52, 175);
+            MaterialCoinsLabel.Location = new Point(1061, 275);
             MaterialCoinsLabel.Name = "MaterialCoinsLabel";
             MaterialCoinsLabel.Size = new Size(61, 15);
             MaterialCoinsLabel.TabIndex = 4;
@@ -112,7 +121,7 @@ namespace dovidnyk_numizmata.Forms
             // numberCoinsLabel
             // 
             numberCoinsLabel.AutoSize = true;
-            numberCoinsLabel.Location = new Point(52, 210);
+            numberCoinsLabel.Location = new Point(1061, 310);
             numberCoinsLabel.Name = "numberCoinsLabel";
             numberCoinsLabel.Size = new Size(162, 15);
             numberCoinsLabel.TabIndex = 5;
@@ -121,7 +130,7 @@ namespace dovidnyk_numizmata.Forms
             // FeaturesCoinsLabel
             // 
             FeaturesCoinsLabel.AutoSize = true;
-            FeaturesCoinsLabel.Location = new Point(52, 245);
+            FeaturesCoinsLabel.Location = new Point(1061, 345);
             FeaturesCoinsLabel.Name = "FeaturesCoinsLabel";
             FeaturesCoinsLabel.Size = new Size(124, 15);
             FeaturesCoinsLabel.TabIndex = 6;
@@ -130,7 +139,7 @@ namespace dovidnyk_numizmata.Forms
             // countryCoinsTextBox
             // 
             countryCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Country", true));
-            countryCoinsTextBox.Location = new Point(124, 66);
+            countryCoinsTextBox.Location = new Point(1133, 166);
             countryCoinsTextBox.Name = "countryCoinsTextBox";
             countryCoinsTextBox.Size = new Size(259, 23);
             countryCoinsTextBox.TabIndex = 7;
@@ -143,7 +152,7 @@ namespace dovidnyk_numizmata.Forms
             // parCoinsTextBox
             // 
             parCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Par", true));
-            parCoinsTextBox.Location = new Point(124, 102);
+            parCoinsTextBox.Location = new Point(1133, 202);
             parCoinsTextBox.Name = "parCoinsTextBox";
             parCoinsTextBox.Size = new Size(259, 23);
             parCoinsTextBox.TabIndex = 8;
@@ -151,15 +160,15 @@ namespace dovidnyk_numizmata.Forms
             // yearOfGraduationCoinsTextBox
             // 
             yearOfGraduationCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "YearOfGraduation", true));
-            yearOfGraduationCoinsTextBox.Location = new Point(124, 137);
+            yearOfGraduationCoinsTextBox.Location = new Point(1140, 237);
             yearOfGraduationCoinsTextBox.Name = "yearOfGraduationCoinsTextBox";
-            yearOfGraduationCoinsTextBox.Size = new Size(259, 23);
+            yearOfGraduationCoinsTextBox.Size = new Size(252, 23);
             yearOfGraduationCoinsTextBox.TabIndex = 9;
             // 
             // materialCoinsTextBox
             // 
             materialCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Material", true));
-            materialCoinsTextBox.Location = new Point(124, 172);
+            materialCoinsTextBox.Location = new Point(1133, 272);
             materialCoinsTextBox.Name = "materialCoinsTextBox";
             materialCoinsTextBox.Size = new Size(259, 23);
             materialCoinsTextBox.TabIndex = 10;
@@ -167,7 +176,7 @@ namespace dovidnyk_numizmata.Forms
             // numberCoinsTextBox
             // 
             numberCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Amount", true));
-            numberCoinsTextBox.Location = new Point(219, 207);
+            numberCoinsTextBox.Location = new Point(1228, 307);
             numberCoinsTextBox.Name = "numberCoinsTextBox";
             numberCoinsTextBox.Size = new Size(164, 23);
             numberCoinsTextBox.TabIndex = 11;
@@ -175,61 +184,37 @@ namespace dovidnyk_numizmata.Forms
             // featuresCoinsTextBox
             // 
             featuresCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "Features", true));
-            featuresCoinsTextBox.Location = new Point(182, 242);
+            featuresCoinsTextBox.Location = new Point(1191, 342);
             featuresCoinsTextBox.Name = "featuresCoinsTextBox";
             featuresCoinsTextBox.Size = new Size(201, 23);
             featuresCoinsTextBox.TabIndex = 12;
             // 
-            // coinsListBox
-            // 
-            coinsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            coinsListBox.DataSource = coinBindingSource;
-            coinsListBox.DisplayMember = "Info";
-            coinsListBox.Font = new Font("Segoe UI", 11F);
-            coinsListBox.FormattingEnabled = true;
-            coinsListBox.Location = new Point(430, 70);
-            coinsListBox.Name = "coinsListBox";
-            coinsListBox.Size = new Size(686, 404);
-            coinsListBox.TabIndex = 18;
-            coinsListBox.SelectedIndexChanged += coinsListBox_SelectedIndexChanged;
-            // 
             // addButton
             // 
-            addButton.Location = new Point(3, 10);
+            addButton.Location = new Point(1061, 493);
             addButton.Name = "addButton";
-            addButton.Size = new Size(66, 50);
+            addButton.Size = new Size(134, 25);
             addButton.TabIndex = 14;
-            addButton.Text = "Додати монету";
+            addButton.Text = "Додати";
             addButton.UseVisualStyleBackColor = true;
             addButton.Click += addButton_Click;
             // 
             // deleteButton
             // 
-            deleteButton.Enabled = false;
-            deleteButton.Location = new Point(88, 10);
+            deleteButton.Location = new Point(1251, 493);
             deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(67, 50);
+            deleteButton.Size = new Size(137, 25);
             deleteButton.TabIndex = 15;
-            deleteButton.Text = "Видалити монету";
+            deleteButton.Text = "Видалити";
             deleteButton.UseVisualStyleBackColor = true;
             deleteButton.Click += deleteButton_Click;
-            // 
-            // searchButton
-            // 
-            searchButton.Location = new Point(174, 10);
-            searchButton.Name = "searchButton";
-            searchButton.Size = new Size(75, 50);
-            searchButton.TabIndex = 16;
-            searchButton.Text = "Пошук";
-            searchButton.UseVisualStyleBackColor = true;
-            searchButton.Click += searchButton_Click;
             // 
             // menuStrip1
             // 
             menuStrip1.Items.AddRange(new ToolStripItem[] { закритиToolStripMenuItem, зберігтиToolStripMenuItem, колекціонериToolStripMenuItem, мояКолекціяToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1140, 24);
+            menuStrip1.Size = new Size(1419, 24);
             menuStrip1.TabIndex = 18;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -261,31 +246,10 @@ namespace dovidnyk_numizmata.Forms
             мояКолекціяToolStripMenuItem.Text = "Моя колекція";
             мояКолекціяToolStripMenuItem.Click += мояКолекціяToolStripMenuItem_Click;
             // 
-            // panel1
-            // 
-            panel1.Controls.Add(clearButton);
-            panel1.Controls.Add(addButton);
-            panel1.Controls.Add(searchButton);
-            panel1.Controls.Add(deleteButton);
-            panel1.Location = new Point(47, 314);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(341, 73);
-            panel1.TabIndex = 19;
-            // 
-            // clearButton
-            // 
-            clearButton.Location = new Point(268, 10);
-            clearButton.Name = "clearButton";
-            clearButton.Size = new Size(68, 50);
-            clearButton.TabIndex = 17;
-            clearButton.Text = "Очистити поля";
-            clearButton.UseVisualStyleBackColor = true;
-            clearButton.Click += clearButton_Click;
-            // 
             // RemainingCoinsLabel
             // 
             RemainingCoinsLabel.AutoSize = true;
-            RemainingCoinsLabel.Location = new Point(52, 280);
+            RemainingCoinsLabel.Location = new Point(1061, 380);
             RemainingCoinsLabel.Name = "RemainingCoinsLabel";
             RemainingCoinsLabel.Size = new Size(81, 15);
             RemainingCoinsLabel.TabIndex = 20;
@@ -294,21 +258,134 @@ namespace dovidnyk_numizmata.Forms
             // remainingCoinsTextBox
             // 
             remainingCoinsTextBox.DataBindings.Add(new Binding("Text", coinBindingSource, "RemainingCoins", true));
-            remainingCoinsTextBox.Location = new Point(141, 277);
+            remainingCoinsTextBox.Location = new Point(1150, 377);
             remainingCoinsTextBox.Name = "remainingCoinsTextBox";
             remainingCoinsTextBox.Size = new Size(242, 23);
             remainingCoinsTextBox.TabIndex = 13;
+            // 
+            // collectionOfCoinsDataGridView
+            // 
+            collectionOfCoinsDataGridView.AllowUserToAddRows = false;
+            collectionOfCoinsDataGridView.AllowUserToDeleteRows = false;
+            collectionOfCoinsDataGridView.AllowUserToResizeRows = false;
+            collectionOfCoinsDataGridView.AutoGenerateColumns = false;
+            collectionOfCoinsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            collectionOfCoinsDataGridView.Columns.AddRange(new DataGridViewColumn[] { countryDataGridViewTextBoxColumn, parDataGridViewTextBoxColumn, yearOfGraduationDataGridViewTextBoxColumn, materialDataGridViewTextBoxColumn, amountDataGridViewTextBoxColumn, featuresDataGridViewTextBoxColumn, remainingCoinsDataGridViewTextBoxColumn, IsRare });
+            collectionOfCoinsDataGridView.DataSource = coinBindingSource;
+            collectionOfCoinsDataGridView.Location = new Point(12, 112);
+            collectionOfCoinsDataGridView.MultiSelect = false;
+            collectionOfCoinsDataGridView.Name = "collectionOfCoinsDataGridView";
+            collectionOfCoinsDataGridView.ReadOnly = true;
+            collectionOfCoinsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            collectionOfCoinsDataGridView.Size = new Size(1001, 404);
+            collectionOfCoinsDataGridView.TabIndex = 21;
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(1046, 152);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(366, 263);
+            panel2.TabIndex = 22;
+            // 
+            // editLabel
+            // 
+            editLabel.AutoSize = true;
+            editLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            editLabel.Location = new Point(1145, 112);
+            editLabel.Name = "editLabel";
+            editLabel.Size = new Size(159, 20);
+            editLabel.TabIndex = 23;
+            editLabel.Text = "Редагування монети";
+            // 
+            // searchingTitle
+            // 
+            searchingTitle.AutoSize = true;
+            searchingTitle.Location = new Point(32, 70);
+            searchingTitle.Name = "searchingTitle";
+            searchingTitle.Size = new Size(49, 15);
+            searchingTitle.TabIndex = 24;
+            searchingTitle.Text = "Пошук:";
+            // 
+            // searchingTextBox
+            // 
+            searchingTextBox.Location = new Point(87, 67);
+            searchingTextBox.Name = "searchingTextBox";
+            searchingTextBox.Size = new Size(279, 23);
+            searchingTextBox.TabIndex = 16;
+            searchingTextBox.TextChanged += searchingtextBox_TextChanged;
+            // 
+            // countryDataGridViewTextBoxColumn
+            // 
+            countryDataGridViewTextBoxColumn.DataPropertyName = "Country";
+            countryDataGridViewTextBoxColumn.HeaderText = "Країна";
+            countryDataGridViewTextBoxColumn.Name = "countryDataGridViewTextBoxColumn";
+            countryDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // parDataGridViewTextBoxColumn
+            // 
+            parDataGridViewTextBoxColumn.DataPropertyName = "Par";
+            parDataGridViewTextBoxColumn.HeaderText = "Номінал";
+            parDataGridViewTextBoxColumn.Name = "parDataGridViewTextBoxColumn";
+            parDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // yearOfGraduationDataGridViewTextBoxColumn
+            // 
+            yearOfGraduationDataGridViewTextBoxColumn.DataPropertyName = "YearOfGraduation";
+            yearOfGraduationDataGridViewTextBoxColumn.HeaderText = "Рік випуску";
+            yearOfGraduationDataGridViewTextBoxColumn.Name = "yearOfGraduationDataGridViewTextBoxColumn";
+            yearOfGraduationDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // materialDataGridViewTextBoxColumn
+            // 
+            materialDataGridViewTextBoxColumn.DataPropertyName = "Material";
+            materialDataGridViewTextBoxColumn.HeaderText = "Матеріал";
+            materialDataGridViewTextBoxColumn.Name = "materialDataGridViewTextBoxColumn";
+            materialDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+            amountDataGridViewTextBoxColumn.HeaderText = "Кількість";
+            amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            amountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // featuresDataGridViewTextBoxColumn
+            // 
+            featuresDataGridViewTextBoxColumn.DataPropertyName = "Features";
+            featuresDataGridViewTextBoxColumn.HeaderText = "Особливості";
+            featuresDataGridViewTextBoxColumn.Name = "featuresDataGridViewTextBoxColumn";
+            featuresDataGridViewTextBoxColumn.ReadOnly = true;
+            featuresDataGridViewTextBoxColumn.Width = 260;
+            // 
+            // remainingCoinsDataGridViewTextBoxColumn
+            // 
+            remainingCoinsDataGridViewTextBoxColumn.DataPropertyName = "RemainingCoins";
+            remainingCoinsDataGridViewTextBoxColumn.HeaderText = "Залишок";
+            remainingCoinsDataGridViewTextBoxColumn.Name = "remainingCoinsDataGridViewTextBoxColumn";
+            remainingCoinsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // IsRare
+            // 
+            IsRare.DataPropertyName = "IsRare";
+            IsRare.HeaderText = "Рідкість";
+            IsRare.Name = "IsRare";
+            IsRare.ReadOnly = true;
+            IsRare.Width = 70;
             // 
             // CoinsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1140, 552);
+            ClientSize = new Size(1419, 552);
+            Controls.Add(deleteButton);
+            Controls.Add(addButton);
+            Controls.Add(searchingTextBox);
+            Controls.Add(searchingTitle);
+            Controls.Add(editLabel);
+            Controls.Add(collectionOfCoinsDataGridView);
             Controls.Add(remainingCoinsTextBox);
             Controls.Add(RemainingCoinsLabel);
-            Controls.Add(panel1);
-            Controls.Add(coinsListBox);
             Controls.Add(featuresCoinsTextBox);
             Controls.Add(numberCoinsTextBox);
             Controls.Add(materialCoinsTextBox);
@@ -323,16 +400,16 @@ namespace dovidnyk_numizmata.Forms
             Controls.Add(countryCoinsLabel);
             Controls.Add(titleCoinsLabel);
             Controls.Add(menuStrip1);
+            Controls.Add(panel2);
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(1156, 591);
+            MinimumSize = new Size(1354, 591);
             Name = "CoinsForm";
             Text = "CoinsForm";
             FormClosing += CoinsForm_FormClosing;
-            Click += CoinsForm_Click;
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)collectionOfCoinsDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -352,19 +429,28 @@ namespace dovidnyk_numizmata.Forms
         private TextBox materialCoinsTextBox;
         private TextBox numberCoinsTextBox;
         private TextBox featuresCoinsTextBox;
-        private ListBox coinsListBox;
         private Button addButton;
         private Button deleteButton;
-        private Button searchButton;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem закритиToolStripMenuItem;
         private ToolStripMenuItem зберігтиToolStripMenuItem;
-        private Panel panel1;
-        private Button clearButton;
         private ToolStripMenuItem колекціонериToolStripMenuItem;
         private ToolStripMenuItem мояКолекціяToolStripMenuItem;
         private Label RemainingCoinsLabel;
         private TextBox remainingCoinsTextBox;
         private BindingSource coinBindingSource;
+        private DataGridView collectionOfCoinsDataGridView;
+        private Panel panel2;
+        private Label editLabel;
+        private Label searchingTitle;
+        private TextBox searchingTextBox;
+        private DataGridViewTextBoxColumn countryDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn parDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn yearOfGraduationDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn materialDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn featuresDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn remainingCoinsDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn IsRare;
     }
 }

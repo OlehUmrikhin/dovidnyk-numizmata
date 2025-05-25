@@ -18,6 +18,10 @@ namespace dovidnyk_numizmata.Models
         public int Amount { get; set; }
         public string Features { get; set; }
         public int RemainingCoins { get; set; }
+        public bool IsRare 
+        {
+            get { return Amount <= 100; }
+        }
 
         [JsonIgnore]
         public string Info 
@@ -57,6 +61,20 @@ namespace dovidnyk_numizmata.Models
         public override string ToString()
         {
             return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Amount}  |  Залишилося: {RemainingCoins}  |  Особливості: {Features}";
+        }
+
+        public bool IsIdentical(Coin otherCoin)
+        {
+            if (otherCoin == null)
+            {
+                return false;
+            }
+
+            return this.Country == otherCoin.Country &&
+                   this.Par == otherCoin.Par &&
+                   this.YearOfGraduation == otherCoin.YearOfGraduation &&
+                   this.Material == otherCoin.Material &&
+                   this.Features == otherCoin.Features;
         }
     }
 }

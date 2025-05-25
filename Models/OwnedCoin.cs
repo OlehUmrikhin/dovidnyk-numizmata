@@ -13,37 +13,52 @@ namespace dovidnyk_numizmata.Models
     {
         [JsonIgnore]
         public Coin Coin { get; set; }
+        [JsonIgnore]
+        public string CoinCountry 
+        {
+            get {  return Coin.Country; }
+        }
+        [JsonIgnore]
+        public string CoinPar
+        {
+            get { return Coin.Par; }
+        }
+        [JsonIgnore]
+        public string CoinYearOfGraduation
+        {
+            get { return Coin.YearOfGraduation;  }
+        }
+        [JsonIgnore]
+        public string CoinMaterial 
+        {
+            get { return Coin.Material; }
+        }
+        [JsonIgnore]
+        public int CoinAmount 
+        {
+            get { return Coin.Amount; }
+        }
+        [JsonIgnore]
+        public string CoinFeatures 
+        {
+            get { return Coin.Features; }
+        }
+        [JsonIgnore]
+        public int CoinRemaining 
+        {
+            get { return Coin.RemainingCoins; }
+        }
+        [JsonIgnore]
+        public bool CoinIsRare
+        {
+            get { return Coin.IsRare; }
+        }
+
+
         public Guid CoinId { get; set; }
 
         public string Condition { get; set; }
-        //public string Country 
-        //{
-        //    get { return Coin.Country; }
-        //}
-        //public string Par 
-        //{
-        //    get { return Coin.Par; }
-        //}
-        //public string YearOfGraduation 
-        //{
-        //    get { return Coin.YearOfGraduation; }
-        //}
-        //public string Material 
-        //{
-        //    get { return Coin.Material; }
-        //}
-        //public int Amount 
-        //{
-        //    get { return Coin.Amount; }
-        //}
-        //public string Features 
-        //{
-        //    get { return Coin.Features; }
-        //}
-        //public int RemainingCoins 
-        //{
-        //    get { return Coin.RemainingCoins; }
-        //}
+        //
 
         public OwnedCoin(Coin coin, string Condition)
         {

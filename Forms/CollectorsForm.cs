@@ -15,33 +15,23 @@ namespace dovidnyk_numizmata
 {
     public partial class CollectorsForm : Form
     {
-        private CoinsForm coinsForm;
-        private bool isSearchActive = false;
         public CollectorsForm()
         {
             InitializeComponent();
             collectorBindingSource.DataSource = AppState.CollectorsList;
 
-            //AppState.TestDataCollectors();
+            //AppState.TestDataCollectors("Німеччина");
             //collectorBindingSource.ResetBindings(true);
-        }
-
-        private void наГоловнуToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (coinsForm == null || coinsForm.IsDisposed)
-            {
-                coinsForm = new CoinsForm();
-            }
-            coinsForm.Show();
         }
 
         private void монетиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (coinsForm == null || coinsForm.IsDisposed)
+            if (AppState.coinsForm == null || AppState.coinsForm.IsDisposed)
             {
-                coinsForm = new CoinsForm();
+                AppState.coinsForm = new CoinsForm();
             }
-            coinsForm.Show();
+            //this.Hide();
+            AppState.coinsForm.Show();
         }
 
         private void колекціонериToolStripMenuItem_Click(object sender, EventArgs e)
@@ -51,124 +41,31 @@ namespace dovidnyk_numizmata
 
         private void addCollectorButton_Click(object sender, EventArgs e)
         {
-            string contacts = contactsCollectorTextBox.Text;
-
-            if (!(int.TryParse(nameCollectorTextBox.Text, out int nameInt)) && !(int.TryParse(countryCollectorTextBox.Text, out int countryInt)))
+            if (AppState.addCollectorForm == null || AppState.addCollectorForm.IsDisposed)
             {
-                string name = nameCollectorTextBox.Text;
-                string country = countryCollectorTextBox.Text;
-                Collector newCollector = new Collector(country, name, contacts);
-
-                if (!string.IsNullOrEmpty(newCollector.Country) && !string.IsNullOrEmpty(newCollector.Name) && !string.IsNullOrEmpty(newCollector.Contacts))
-                {
-                    AppState.CollectorsList.Add(newCollector);
-                    AppState.isEdit = true;
-                    collectorBindingSource.ResetBindings(true);
-                }
-                else
-                {
-                    MessageBox.Show("Введіть всі поля!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
+                AppState.addCollectorForm = new AddCollectorForm();
             }
-            else
-            {
-                MessageBox.Show("Заповніть всі поля коректно", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            AppState.addCollectorForm.ShowDialog();
         }
 
         private void deleteCollectorButton_Click(object sender, EventArgs e)
         {
-            if (collectorListBox.SelectedItem is Collector collectorToRemove)
+            if (collectorBindingSource.Current is Collector collectorToRemove && collectorToRemove.Id.ToString() != AppState.MyId) 
             {
-                if (!collectorToRemove.Id.Equals(Guid.Parse(AppState.MyId)))
+                var result = MessageBox.Show("Чи дійсно Ви хочете видалити цього колекціонера?", "Повідомлення", MessageBoxButtons.YesNo);
+                switch (result)
                 {
-                    if (isSearchActive)
-                    {
+                    case DialogResult.Yes:
+                        MessageBox.Show("Колекціонер успішно видалений!", "Видалення", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         AppState.CollectorsList.Remove(collectorToRemove);
                         AppState.isEdit = true;
-                    }
-                    else
-                    {
-                        AppState.CollectorsList.Remove(collectorToRemove);
-                        AppState.isEdit = true;
-                    }
-                    collectorBindingSource.ResetBindings(false);
+                        collectorBindingSource.ResetBindings(true);
+                        break;
+                    case DialogResult.No:
+                        break;
                 }
             }
-        }
-
-        private void collectorsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            bool isItemSelected = (collectorListBox.SelectedIndex != -1);
-            addCollectorButton.Enabled = !isItemSelected;
-            deleteCollectorButton.Enabled = isItemSelected;
-
-            if (isItemSelected && collectorBindingSource.Current is Collector selectedCollector)
-            {
-
-                if (countryCollectorTextBox.DataBindings["Text"] == null)
-                {
-                    countryCollectorTextBox.DataBindings.Add("Text", collectorBindingSource, "Country");
-                }
-
-                if (nameCollectorTextBox.DataBindings["Text"] == null)
-                {
-                    nameCollectorTextBox.DataBindings.Add("Text", collectorBindingSource, "Name");
-                }
-
-                if (contactsCollectorTextBox.DataBindings["Text"] == null)
-                {
-                    contactsCollectorTextBox.DataBindings.Add("Text", collectorBindingSource, "Contacts");
-                }
-            }
-        }
-
-        private void ClearDataBinding()
-        {
-            collectorListBox.SelectedIndex = -1;
-            countryCollectorTextBox.DataBindings.Clear();
-            nameCollectorTextBox.DataBindings.Clear();
-            contactsCollectorTextBox.DataBindings.Clear();
-        }
-
-        private void CollectorsForm_Click(object sender, EventArgs e)
-        {
-            collectorListBox.SelectedIndex = -1;
-
-            string country = countryCollectorTextBox.Text;
-            string name = nameCollectorTextBox.Text;
-            string contacts = contactsCollectorTextBox.Text;
-
-            ClearDataBinding();
-
-            countryCollectorTextBox.Text = country;
-            nameCollectorTextBox.Text = name;
-            contactsCollectorTextBox.Text = contacts;
-        }
-
-        private void searchCollectorButton_Click(object sender, EventArgs e)
-        {
-            string search = searchCollectorTextBox.Text.Trim().ToLower();
-
-            if (string.IsNullOrEmpty(search) && isSearchActive)
-            {
-                collectorBindingSource.DataSource = AppState.CollectorsList;
-                isSearchActive = false;
-                collectorListBox.SelectedIndex = -1;
-                return;
-            }
-
-            List<Collector> result = AppState.CollectorsList.Where(curentCollector =>
-                (curentCollector.Country.ToLower().Contains(search)) ||
-                (curentCollector.Name.ToLower().Contains(search)) ||
-                (curentCollector.Contacts.ToLower().Contains(search))
-            ).ToList();
-
-            collectorBindingSource.DataSource = result;
-            isSearchActive = true;
-            collectorListBox.SelectedIndex = -1;
-
+            else MessageBox.Show("Це Ви! Ви не можете видалити себе, як колекціонера!", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void зберегтиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,26 +82,71 @@ namespace dovidnyk_numizmata
         {
             if (AppState.collectionsOfCollectorsForm == null || AppState.collectionsOfCollectorsForm.IsDisposed)
             {
-                var selectedCollector = collectorListBox.SelectedItem as Collector;
-                var me = AppState.CollectorsList.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
-                if (selectedCollector != null && selectedCollector != me)
+                if (collectorBindingSource.Current is Collector selectedCollector) 
                 {
-                    AppState.collectionsOfCollectorsForm = new CollectionsOfCollectorsForm(selectedCollector);
-                    AppState.collectionsOfCollectorsForm.Show();
-                }
-                else if (selectedCollector == me) 
-                {
-                    if (AppState.collectionOfCollectorsForm == null || AppState.collectionOfCollectorsForm.IsDisposed)
+                    var me = AppState.CollectorsList.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
+                    if (selectedCollector != null && selectedCollector != me)
                     {
-                        if (me != null)
+                        AppState.collectionsOfCollectorsForm = new CollectionsOfCollectorsForm(selectedCollector);
+                        AppState.collectionsOfCollectorsForm.Show();
+                    }
+                    else if (selectedCollector == me)
+                    {
+                        if (AppState.collectionOfCollectorsForm == null || AppState.collectionOfCollectorsForm.IsDisposed)
                         {
-                            AppState.collectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
-                            AppState.collectionOfCollectorsForm.Show();
+                            if (me != null)
+                            {
+                                AppState.collectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
+                                AppState.collectionOfCollectorsForm.Show();
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private void searchCollectorTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+            string search = searchCollectorTextBox.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                collectorBindingSource.DataSource = AppState.CollectorsList;
+                return;
+            }
+
+            List<Collector> result = AppState.CollectorsList.Where(curentCollector =>
+                (curentCollector.Country.ToLower().Contains(search)) ||
+                (curentCollector.Name.ToLower().Contains(search)) ||
+                (curentCollector.Contacts.ToLower().Contains(search))
+            ).ToList();
+
+            collectorBindingSource.DataSource = result;
             
         }
+
+        //public void CollectorsForm_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    if (AppState.isEdit)
+        //    {
+        //        var result = MessageBox.Show("Чи хочете зберегти зміни?", "Повідомлення", MessageBoxButtons.YesNoCancel);
+        //        switch (result)
+        //        {
+        //            case DialogResult.Yes:
+        //                string jsonStringCoinsList = JsonSerializer.Serialize(AppState.CoinsList);
+        //                string jsonStringCollectorList = JsonSerializer.Serialize(AppState.CollectorsList);
+        //                File.WriteAllText("coins.txt", jsonStringCoinsList);
+        //                File.WriteAllText("collectors.txt", jsonStringCollectorList);
+        //                break;
+        //            case DialogResult.No:
+        //                break;
+        //            case DialogResult.Cancel:
+        //                e.Cancel = true;
+        //                break;
+        //        }
+        //    }
+        //}
     }
+    
 }

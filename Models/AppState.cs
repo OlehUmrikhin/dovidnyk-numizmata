@@ -11,13 +11,17 @@ namespace dovidnyk_numizmata.Models
 {
     public static class AppState
     {
-        public static BindingList<Coin> CoinsList;
-        public static BindingList<Collector> CollectorsList;
-        public static string MyId;
+        public static BindingList<Coin>? CoinsList;
+        public static BindingList<Collector>? CollectorsList;
+        public static string? MyId;
         public static bool isEdit = false;
-        public static CollectionsOfCollectorsForm collectionOfCollectorsForm;
-        public static CollectorsForm collectorsForm;
-        public static CollectionsOfCollectorsForm collectionsOfCollectorsForm;
+        public static CollectionsOfCollectorsForm? collectionOfCollectorsForm;
+        public static CollectorsForm? collectorsForm;
+        public static CollectionsOfCollectorsForm? collectionsOfCollectorsForm;
+        public static AddCoinForm? addCoinForm;
+        public static AddCollectorForm? addCollectorForm;
+        public static CoinsForm? coinsForm;
+
 
         public static void Initialize() 
         {
@@ -38,6 +42,19 @@ namespace dovidnyk_numizmata.Models
             else
             {
                 CoinsList = new BindingList<Coin>();
+                //TestDataCoins("Україна", "гривня");
+                //TestDataCoins("США", "долар");
+                //TestDataCoins("Німеччина", "євро");
+                //TestDataCoins("Китай", "юань");
+                //TestDataCoins("Японія", "єна");
+                //TestDataCoins("Турція", "ліра");
+                //TestDataCoins("ОАЕ", "дирхам");
+                //TestDataCoins("Велика Британія", "фунт");
+                //TestDataCoins("Південна Корея", "вона");
+                //TestDataCoins("Бразилія", "реал");
+                //TestDataCoins("Італія", "ліра");
+                //string coinsJson = JsonSerializer.Serialize(CoinsList);
+                //File.WriteAllText("coins.txt", coinsJson);
             } 
             var collectors = JsonSerializer.Deserialize<List<Collector>>(jsonCollectorsListString);
             collectors.ForEach(
@@ -69,7 +86,7 @@ namespace dovidnyk_numizmata.Models
 
         private static void SeedCollector() 
         {
-            var collector = new Collector("Ukraine", "Me", "-");
+            var collector = new Collector("Україна", "Я", "-");
             List<Collector> collectors = [collector];
             MyId = collector.Id.ToString();
             string collectorsJson = JsonSerializer.Serialize(collectors);
@@ -98,11 +115,11 @@ namespace dovidnyk_numizmata.Models
             }
         }
 
-        public static void TestDataCollectors()
+        public static void TestDataCollectors(string country)
         {
             for (int i = 0; i < 10; i++)
             {
-                CollectorsList.Add(new Collector("Ukraine", $"Collector{i+1}", "-"));
+                CollectorsList.Add(new Collector($"{country}", $"Колекціонер {i+1}", "-"));
             }
         }
     }

@@ -18,57 +18,24 @@ namespace dovidnyk_numizmata.Forms
     {
 
 
-        private bool isSearchActive = false;
         private Collector CurrentСollectioner;
         public CollectionsOfCollectorsForm(Collector collectioner)
         {
             InitializeComponent();
 
-
             this.CurrentСollectioner = collectioner;
             coinBindingSource.DataSource = AppState.CoinsList;
             ownedCoinBindingSource.DataSource = collectioner.CoinsCollection;
-            textBox1.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Country");
-            textBox2.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Par");
-            textBox3.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.YearOfGraduation");
-            textBox4.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Material");
-            textBox5.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Amount");
-            textBox6.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.Features");
-            textBox7.DataBindings.Add("Text", ownedCoinBindingSource, "Coin.RemainingCoins");
-        }
-
-        private void searchingAllCoinsButton_Click(object sender, EventArgs e)
-        {
-            string search = searchingAllCoinsTextBox.Text.Trim().ToLower();
-
-            if (string.IsNullOrEmpty(search) && isSearchActive)
-            {
-                coinBindingSource.DataSource = AppState.CoinsList;
-                isSearchActive = false;
-                AllCoinsListBox.SelectedIndex = -1;
-                return;
-            }
-
-            List<Coin> result = AppState.CoinsList.Where(curentCoin =>
-                (curentCoin.Country.ToLower().Contains(search)) ||
-                (curentCoin.Par.ToLower().Contains(search)) ||
-                (curentCoin.YearOfGraduation.ToLower().Contains(search)) ||
-                (curentCoin.Material.ToLower().Contains(search)) ||
-                (curentCoin.Features.ToLower().Contains(search))
-            ).ToList();
-
-            coinBindingSource.DataSource = result;
-            isSearchActive = true;
-            AllCoinsListBox.SelectedIndex = -1;
+            collectorBindingSource.DataSource = collectioner;
         }
 
         private void addCoinToCollectionOfCollectorButton_Click(object sender, EventArgs e)
         {
-            Coin? selectedCoin = (Coin?)AllCoinsListBox.SelectedItem;
+            Coin? selectedCoin = (Coin?)coinBindingSource.Current;
             if (selectedCoin != null && selectedCoin.RemainingCoins > 0)
             {
+                MessageBox.Show("Монета успішно додана до колекції колекціонера!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 selectedCoin.RemainingCoins--;
-
                 this.CurrentСollectioner.CollectCoin(selectedCoin, "new");
                 ownedCoinBindingSource.ResetBindings(true);
                 coinBindingSource.ResetBindings(true);
@@ -88,25 +55,54 @@ namespace dovidnyk_numizmata.Forms
 
         private void deleteCoinInCollectionOfCollectorButton_Click(object sender, EventArgs e)
         {
-            if (CollectionOfCollectorListBox.SelectedItem is OwnedCoin selectedCoin)
+            if (ownedCoinBindingSource.Current is OwnedCoin selectedCoin)
             {
-                selectedCoin.Coin.RemainingCoins++;
-                this.CurrentСollectioner.DeCollectCoin(selectedCoin);
-                ownedCoinBindingSource.ResetBindings(true);
-                coinBindingSource.ResetBindings(true);
-                AppState.isEdit = true;
+                var result = MessageBox.Show("Чи дійсно Ви хочете видалити цю монету з колекції колекціонера?", "Повідомлення", MessageBoxButtons.YesNo);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        MessageBox.Show("Монета успішно видалена!", "Видалення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        selectedCoin.Coin.RemainingCoins++;
+                        this.CurrentСollectioner.DeCollectCoin(selectedCoin);
+                        ownedCoinBindingSource.ResetBindings(true);
+                        coinBindingSource.ResetBindings(true);
+                        AppState.isEdit = true;
+                        break;
+                    case DialogResult.No:
+                        break;
+                }
+
             }
         }
 
-        private void searchingCollectionOfCollectorButton_Click(object sender, EventArgs e)
+        private void searchingAllCoinsTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string search = searchingAllCoinsTextBox.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                coinBindingSource.DataSource = AppState.CoinsList;
+                return;
+            }
+
+            List<Coin> result = AppState.CoinsList.Where(curentCoin =>
+                (curentCoin.Country.ToLower().Contains(search)) ||
+                (curentCoin.Par.ToLower().Contains(search)) ||
+                (curentCoin.YearOfGraduation.ToLower().Contains(search)) ||
+                (curentCoin.Material.ToLower().Contains(search)) ||
+                (curentCoin.Features.ToLower().Contains(search))
+            ).ToList();
+
+            coinBindingSource.DataSource = result;
+        }
+
+        private void searchingCollectionOfCollectorTextBox_TextChanged(object sender, EventArgs e)
         {
             string searchedOwnedCoins = searchingCollectionOfCollectorTextBox.Text.Trim().ToLower();
 
-            if (string.IsNullOrEmpty(searchedOwnedCoins) && isSearchActive)
+            if (string.IsNullOrEmpty(searchedOwnedCoins))
             {
                 ownedCoinBindingSource.DataSource = CurrentСollectioner.CoinsCollection;
-                isSearchActive = false;
-                //CollectionOfCollectorListBox.SelectedIndex = -1;
                 return;
             }
 
@@ -119,8 +115,6 @@ namespace dovidnyk_numizmata.Forms
             ).ToList();
 
             ownedCoinBindingSource.DataSource = result;
-            isSearchActive = true;
-            //CollectionOfCollectorListBox.SelectedIndex = -1;
         }
     }
 }
