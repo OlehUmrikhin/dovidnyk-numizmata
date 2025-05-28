@@ -35,7 +35,6 @@ namespace dovidnyk_numizmata.Forms
             if (selectedCoin != null && selectedCoin.RemainingCoins > 0)
             {
                 MessageBox.Show("Монета успішно додана до колекції колекціонера!", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                selectedCoin.RemainingCoins--;
                 this.CurrentСollectioner.CollectCoin(selectedCoin, "new");
                 ownedCoinBindingSource.ResetBindings(true);
                 coinBindingSource.ResetBindings(true);
@@ -62,7 +61,6 @@ namespace dovidnyk_numizmata.Forms
                 {
                     case DialogResult.Yes:
                         MessageBox.Show("Монета успішно видалена!", "Видалення", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        selectedCoin.Coin.RemainingCoins++;
                         this.CurrentСollectioner.DeCollectCoin(selectedCoin);
                         ownedCoinBindingSource.ResetBindings(true);
                         coinBindingSource.ResetBindings(true);
@@ -115,6 +113,46 @@ namespace dovidnyk_numizmata.Forms
             ).ToList();
 
             ownedCoinBindingSource.DataSource = result;
+        }
+
+        private void монетиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppState.coinsForm == null || AppState.coinsForm.IsDisposed)
+            {
+                AppState.coinsForm = new CoinsForm();
+                AppState.coinsForm.Show();
+            }
+            AppState.coinsForm?.Activate();
+        }
+
+        private void колекціонериToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AppState.collectorsForm == null || AppState.collectorsForm.IsDisposed)
+            {
+                AppState.collectorsForm = new CollectorsForm();
+                AppState.collectorsForm.Show();
+            }
+            AppState.collectorsForm?.Activate();
+        }
+
+        private void мояКолекціяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var me = AppState.CollectorsList?.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
+            if (AppState.myCollectionOfCollectorsForm == null || AppState.myCollectionOfCollectorsForm.IsDisposed)
+            {
+                if (me != null)
+                {
+                    AppState.myCollectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
+                    AppState.myCollectionOfCollectorsForm.Show();
+
+                }
+            }
+            AppState.myCollectionOfCollectorsForm?.Activate();
+        }
+
+        private void вийтиЗДодаткуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

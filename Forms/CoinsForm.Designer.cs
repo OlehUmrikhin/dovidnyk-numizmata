@@ -48,17 +48,17 @@ namespace dovidnyk_numizmata.Forms
             addButton = new Button();
             deleteButton = new Button();
             menuStrip1 = new MenuStrip();
-            закритиToolStripMenuItem = new ToolStripMenuItem();
-            зберігтиToolStripMenuItem = new ToolStripMenuItem();
-            колекціонериToolStripMenuItem = new ToolStripMenuItem();
-            мояКолекціяToolStripMenuItem = new ToolStripMenuItem();
+            навігаціяToolStripMenuItem = new ToolStripMenuItem();
+            колекціонериToolStripMenuItem1 = new ToolStripMenuItem();
+            мояКолекціяToolStripMenuItem1 = new ToolStripMenuItem();
+            функціїToolStripMenuItem = new ToolStripMenuItem();
+            додатиToolStripMenuItem = new ToolStripMenuItem();
+            видалитиToolStripMenuItem = new ToolStripMenuItem();
+            зберегтиToolStripMenuItem = new ToolStripMenuItem();
+            вийтиЗДодаткуToolStripMenuItem = new ToolStripMenuItem();
             RemainingCoinsLabel = new Label();
             remainingCoinsTextBox = new TextBox();
             collectionOfCoinsDataGridView = new DataGridView();
-            panel2 = new Panel();
-            editLabel = new Label();
-            searchingTitle = new Label();
-            searchingTextBox = new TextBox();
             countryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             parDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             yearOfGraduationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -67,6 +67,10 @@ namespace dovidnyk_numizmata.Forms
             featuresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             remainingCoinsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             IsRare = new DataGridViewCheckBoxColumn();
+            panel2 = new Panel();
+            editLabel = new Label();
+            searchingTitle = new Label();
+            searchingTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)collectionOfCoinsDataGridView).BeginInit();
@@ -191,60 +195,91 @@ namespace dovidnyk_numizmata.Forms
             // 
             // addButton
             // 
+            addButton.BackColor = SystemColors.Control;
             addButton.Location = new Point(1061, 493);
             addButton.Name = "addButton";
             addButton.Size = new Size(134, 25);
             addButton.TabIndex = 14;
             addButton.Text = "Додати";
-            addButton.UseVisualStyleBackColor = true;
+            addButton.UseVisualStyleBackColor = false;
             addButton.Click += addButton_Click;
             // 
             // deleteButton
             // 
+            deleteButton.BackColor = SystemColors.Control;
             deleteButton.Location = new Point(1251, 493);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(137, 25);
             deleteButton.TabIndex = 15;
             deleteButton.Text = "Видалити";
-            deleteButton.UseVisualStyleBackColor = true;
+            deleteButton.UseVisualStyleBackColor = false;
             deleteButton.Click += deleteButton_Click;
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { закритиToolStripMenuItem, зберігтиToolStripMenuItem, колекціонериToolStripMenuItem, мояКолекціяToolStripMenuItem });
+            menuStrip1.BackColor = SystemColors.Control;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { навігаціяToolStripMenuItem, функціїToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1419, 24);
             menuStrip1.TabIndex = 18;
             menuStrip1.Text = "menuStrip1";
             // 
-            // закритиToolStripMenuItem
+            // навігаціяToolStripMenuItem
             // 
-            закритиToolStripMenuItem.Name = "закритиToolStripMenuItem";
-            закритиToolStripMenuItem.Size = new Size(64, 20);
-            закритиToolStripMenuItem.Text = "Закрити";
-            закритиToolStripMenuItem.Click += закритиToolStripMenuItem_Click;
+            навігаціяToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { колекціонериToolStripMenuItem1, мояКолекціяToolStripMenuItem1 });
+            навігаціяToolStripMenuItem.Name = "навігаціяToolStripMenuItem";
+            навігаціяToolStripMenuItem.Size = new Size(83, 20);
+            навігаціяToolStripMenuItem.Text = "Навігація ▾";
             // 
-            // зберігтиToolStripMenuItem
+            // колекціонериToolStripMenuItem1
             // 
-            зберігтиToolStripMenuItem.Name = "зберігтиToolStripMenuItem";
-            зберігтиToolStripMenuItem.Size = new Size(69, 20);
-            зберігтиToolStripMenuItem.Text = "Зберегти";
-            зберігтиToolStripMenuItem.Click += зберегтиToolStripMenuItem_Click;
+            колекціонериToolStripMenuItem1.Name = "колекціонериToolStripMenuItem1";
+            колекціонериToolStripMenuItem1.Size = new Size(151, 22);
+            колекціонериToolStripMenuItem1.Text = "Колекціонери";
+            колекціонериToolStripMenuItem1.Click += колекціонериToolStripMenuItem_Click;
             // 
-            // колекціонериToolStripMenuItem
+            // мояКолекціяToolStripMenuItem1
             // 
-            колекціонериToolStripMenuItem.Name = "колекціонериToolStripMenuItem";
-            колекціонериToolStripMenuItem.Size = new Size(96, 20);
-            колекціонериToolStripMenuItem.Text = "Колекціонери";
-            колекціонериToolStripMenuItem.Click += колекціонериToolStripMenuItem_Click;
+            мояКолекціяToolStripMenuItem1.Name = "мояКолекціяToolStripMenuItem1";
+            мояКолекціяToolStripMenuItem1.Size = new Size(151, 22);
+            мояКолекціяToolStripMenuItem1.Text = "Моя колекція";
+            мояКолекціяToolStripMenuItem1.Click += мояКолекціяToolStripMenuItem_Click;
             // 
-            // мояКолекціяToolStripMenuItem
+            // функціїToolStripMenuItem
             // 
-            мояКолекціяToolStripMenuItem.Name = "мояКолекціяToolStripMenuItem";
-            мояКолекціяToolStripMenuItem.Size = new Size(94, 20);
-            мояКолекціяToolStripMenuItem.Text = "Моя колекція";
-            мояКолекціяToolStripMenuItem.Click += мояКолекціяToolStripMenuItem_Click;
+            функціїToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { додатиToolStripMenuItem, видалитиToolStripMenuItem, зберегтиToolStripMenuItem, вийтиЗДодаткуToolStripMenuItem });
+            функціїToolStripMenuItem.Name = "функціїToolStripMenuItem";
+            функціїToolStripMenuItem.Size = new Size(73, 20);
+            функціїToolStripMenuItem.Text = "Функції ▾";
+            // 
+            // додатиToolStripMenuItem
+            // 
+            додатиToolStripMenuItem.Name = "додатиToolStripMenuItem";
+            додатиToolStripMenuItem.Size = new Size(160, 22);
+            додатиToolStripMenuItem.Text = "Додати";
+            додатиToolStripMenuItem.Click += addButton_Click;
+            // 
+            // видалитиToolStripMenuItem
+            // 
+            видалитиToolStripMenuItem.Name = "видалитиToolStripMenuItem";
+            видалитиToolStripMenuItem.Size = new Size(160, 22);
+            видалитиToolStripMenuItem.Text = "Видалити";
+            видалитиToolStripMenuItem.Click += deleteButton_Click;
+            // 
+            // зберегтиToolStripMenuItem
+            // 
+            зберегтиToolStripMenuItem.Name = "зберегтиToolStripMenuItem";
+            зберегтиToolStripMenuItem.Size = new Size(160, 22);
+            зберегтиToolStripMenuItem.Text = "Зберегти";
+            зберегтиToolStripMenuItem.Click += зберегтиToolStripMenuItem_Click;
+            // 
+            // вийтиЗДодаткуToolStripMenuItem
+            // 
+            вийтиЗДодаткуToolStripMenuItem.Name = "вийтиЗДодаткуToolStripMenuItem";
+            вийтиЗДодаткуToolStripMenuItem.Size = new Size(160, 22);
+            вийтиЗДодаткуToolStripMenuItem.Text = "Вийти з додатку";
+            вийтиЗДодаткуToolStripMenuItem.Click += вийтиЗДодаткуToolStripMenuItem_Click;
             // 
             // RemainingCoinsLabel
             // 
@@ -279,40 +314,6 @@ namespace dovidnyk_numizmata.Forms
             collectionOfCoinsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             collectionOfCoinsDataGridView.Size = new Size(1001, 404);
             collectionOfCoinsDataGridView.TabIndex = 21;
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(1046, 152);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(366, 263);
-            panel2.TabIndex = 22;
-            // 
-            // editLabel
-            // 
-            editLabel.AutoSize = true;
-            editLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            editLabel.Location = new Point(1145, 112);
-            editLabel.Name = "editLabel";
-            editLabel.Size = new Size(159, 20);
-            editLabel.TabIndex = 23;
-            editLabel.Text = "Редагування монети";
-            // 
-            // searchingTitle
-            // 
-            searchingTitle.AutoSize = true;
-            searchingTitle.Location = new Point(32, 70);
-            searchingTitle.Name = "searchingTitle";
-            searchingTitle.Size = new Size(49, 15);
-            searchingTitle.TabIndex = 24;
-            searchingTitle.Text = "Пошук:";
-            // 
-            // searchingTextBox
-            // 
-            searchingTextBox.Location = new Point(87, 67);
-            searchingTextBox.Name = "searchingTextBox";
-            searchingTextBox.Size = new Size(279, 23);
-            searchingTextBox.TabIndex = 16;
-            searchingTextBox.TextChanged += searchingtextBox_TextChanged;
             // 
             // countryDataGridViewTextBoxColumn
             // 
@@ -372,11 +373,45 @@ namespace dovidnyk_numizmata.Forms
             IsRare.ReadOnly = true;
             IsRare.Width = 70;
             // 
+            // panel2
+            // 
+            panel2.Location = new Point(1046, 152);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(366, 263);
+            panel2.TabIndex = 22;
+            // 
+            // editLabel
+            // 
+            editLabel.AutoSize = true;
+            editLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            editLabel.Location = new Point(1145, 112);
+            editLabel.Name = "editLabel";
+            editLabel.Size = new Size(159, 20);
+            editLabel.TabIndex = 23;
+            editLabel.Text = "Редагування монети";
+            // 
+            // searchingTitle
+            // 
+            searchingTitle.AutoSize = true;
+            searchingTitle.Location = new Point(32, 70);
+            searchingTitle.Name = "searchingTitle";
+            searchingTitle.Size = new Size(49, 15);
+            searchingTitle.TabIndex = 24;
+            searchingTitle.Text = "Пошук:";
+            // 
+            // searchingTextBox
+            // 
+            searchingTextBox.Location = new Point(87, 67);
+            searchingTextBox.Name = "searchingTextBox";
+            searchingTextBox.Size = new Size(279, 23);
+            searchingTextBox.TabIndex = 16;
+            searchingTextBox.TextChanged += searchingtextBox_TextChanged;
+            // 
             // CoinsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
+            BackColor = Color.SeaShell;
             ClientSize = new Size(1419, 552);
             Controls.Add(deleteButton);
             Controls.Add(addButton);
@@ -401,8 +436,10 @@ namespace dovidnyk_numizmata.Forms
             Controls.Add(titleCoinsLabel);
             Controls.Add(menuStrip1);
             Controls.Add(panel2);
+            ForeColor = SystemColors.ControlText;
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(1354, 591);
+            MaximumSize = new Size(1435, 591);
+            MinimumSize = new Size(1435, 591);
             Name = "CoinsForm";
             Text = "CoinsForm";
             FormClosing += CoinsForm_FormClosing;
@@ -432,10 +469,6 @@ namespace dovidnyk_numizmata.Forms
         private Button addButton;
         private Button deleteButton;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem закритиToolStripMenuItem;
-        private ToolStripMenuItem зберігтиToolStripMenuItem;
-        private ToolStripMenuItem колекціонериToolStripMenuItem;
-        private ToolStripMenuItem мояКолекціяToolStripMenuItem;
         private Label RemainingCoinsLabel;
         private TextBox remainingCoinsTextBox;
         private BindingSource coinBindingSource;
@@ -452,5 +485,13 @@ namespace dovidnyk_numizmata.Forms
         private DataGridViewTextBoxColumn featuresDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn remainingCoinsDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn IsRare;
+        private ToolStripMenuItem навігаціяToolStripMenuItem;
+        private ToolStripMenuItem колекціонериToolStripMenuItem1;
+        private ToolStripMenuItem мояКолекціяToolStripMenuItem1;
+        private ToolStripMenuItem функціїToolStripMenuItem;
+        private ToolStripMenuItem додатиToolStripMenuItem;
+        private ToolStripMenuItem видалитиToolStripMenuItem;
+        private ToolStripMenuItem зберегтиToolStripMenuItem;
+        private ToolStripMenuItem вийтиЗДодаткуToolStripMenuItem;
     }
 }

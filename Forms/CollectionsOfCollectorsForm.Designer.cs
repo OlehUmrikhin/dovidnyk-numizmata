@@ -40,7 +40,15 @@ namespace dovidnyk_numizmata.Forms
             searchingCollectionOfCollectorTextBox = new TextBox();
             deleteCoinInCollectionOfCollectorButton = new Button();
             menuStrip1 = new MenuStrip();
-            зберегтиToolStripMenuItem = new ToolStripMenuItem();
+            навігаціяToolStripMenuItem = new ToolStripMenuItem();
+            монетиToolStripMenuItem = new ToolStripMenuItem();
+            колекціонериToolStripMenuItem = new ToolStripMenuItem();
+            мояКолекціяToolStripMenuItem = new ToolStripMenuItem();
+            функціїToolStripMenuItem = new ToolStripMenuItem();
+            додатиToolStripMenuItem = new ToolStripMenuItem();
+            видалитиToolStripMenuItem = new ToolStripMenuItem();
+            зберегтиToolStripMenuItem1 = new ToolStripMenuItem();
+            вийтиЗДодаткуToolStripMenuItem = new ToolStripMenuItem();
             collectorBindingSource = new BindingSource(components);
             NameOfCollectorTitle = new Label();
             allCoinsDataGridView = new DataGridView();
@@ -86,12 +94,13 @@ namespace dovidnyk_numizmata.Forms
             // 
             // addCoinToCollectionOfCollectorButton
             // 
+            addCoinToCollectionOfCollectorButton.BackColor = SystemColors.Control;
             addCoinToCollectionOfCollectorButton.Location = new Point(357, 66);
             addCoinToCollectionOfCollectorButton.Name = "addCoinToCollectionOfCollectorButton";
             addCoinToCollectionOfCollectorButton.Size = new Size(75, 23);
             addCoinToCollectionOfCollectorButton.TabIndex = 16;
             addCoinToCollectionOfCollectorButton.Text = "Додати";
-            addCoinToCollectionOfCollectorButton.UseVisualStyleBackColor = true;
+            addCoinToCollectionOfCollectorButton.UseVisualStyleBackColor = false;
             addCoinToCollectionOfCollectorButton.Click += addCoinToCollectionOfCollectorButton_Click;
             // 
             // AllCoinsTitle
@@ -128,29 +137,86 @@ namespace dovidnyk_numizmata.Forms
             // 
             // deleteCoinInCollectionOfCollectorButton
             // 
+            deleteCoinInCollectionOfCollectorButton.BackColor = SystemColors.Control;
             deleteCoinInCollectionOfCollectorButton.Location = new Point(1355, 69);
             deleteCoinInCollectionOfCollectorButton.Name = "deleteCoinInCollectionOfCollectorButton";
             deleteCoinInCollectionOfCollectorButton.Size = new Size(122, 23);
             deleteCoinInCollectionOfCollectorButton.TabIndex = 34;
             deleteCoinInCollectionOfCollectorButton.Text = "Видалити";
-            deleteCoinInCollectionOfCollectorButton.UseVisualStyleBackColor = true;
+            deleteCoinInCollectionOfCollectorButton.UseVisualStyleBackColor = false;
             deleteCoinInCollectionOfCollectorButton.Click += deleteCoinInCollectionOfCollectorButton_Click;
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { зберегтиToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { навігаціяToolStripMenuItem, функціїToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1902, 24);
             menuStrip1.TabIndex = 35;
             menuStrip1.Text = "menuStrip1";
             // 
-            // зберегтиToolStripMenuItem
+            // навігаціяToolStripMenuItem
             // 
-            зберегтиToolStripMenuItem.Name = "зберегтиToolStripMenuItem";
-            зберегтиToolStripMenuItem.Size = new Size(69, 20);
-            зберегтиToolStripMenuItem.Text = "Зберегти";
-            зберегтиToolStripMenuItem.Click += зберегтиToolStripMenuItem_Click;
+            навігаціяToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { монетиToolStripMenuItem, колекціонериToolStripMenuItem, мояКолекціяToolStripMenuItem });
+            навігаціяToolStripMenuItem.Name = "навігаціяToolStripMenuItem";
+            навігаціяToolStripMenuItem.Size = new Size(83, 20);
+            навігаціяToolStripMenuItem.Text = "Навігація ▾";
+            // 
+            // монетиToolStripMenuItem
+            // 
+            монетиToolStripMenuItem.Name = "монетиToolStripMenuItem";
+            монетиToolStripMenuItem.Size = new Size(151, 22);
+            монетиToolStripMenuItem.Text = "Монети";
+            монетиToolStripMenuItem.Click += монетиToolStripMenuItem_Click;
+            // 
+            // колекціонериToolStripMenuItem
+            // 
+            колекціонериToolStripMenuItem.Name = "колекціонериToolStripMenuItem";
+            колекціонериToolStripMenuItem.Size = new Size(151, 22);
+            колекціонериToolStripMenuItem.Text = "Колекціонери";
+            колекціонериToolStripMenuItem.Click += колекціонериToolStripMenuItem_Click;
+            // 
+            // мояКолекціяToolStripMenuItem
+            // 
+            мояКолекціяToolStripMenuItem.Name = "мояКолекціяToolStripMenuItem";
+            мояКолекціяToolStripMenuItem.Size = new Size(151, 22);
+            мояКолекціяToolStripMenuItem.Text = "Моя колекція";
+            мояКолекціяToolStripMenuItem.Click += мояКолекціяToolStripMenuItem_Click;
+            // 
+            // функціїToolStripMenuItem
+            // 
+            функціїToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { додатиToolStripMenuItem, видалитиToolStripMenuItem, зберегтиToolStripMenuItem1, вийтиЗДодаткуToolStripMenuItem });
+            функціїToolStripMenuItem.Name = "функціїToolStripMenuItem";
+            функціїToolStripMenuItem.Size = new Size(73, 20);
+            функціїToolStripMenuItem.Text = "Функції ▾";
+            // 
+            // додатиToolStripMenuItem
+            // 
+            додатиToolStripMenuItem.Name = "додатиToolStripMenuItem";
+            додатиToolStripMenuItem.Size = new Size(160, 22);
+            додатиToolStripMenuItem.Text = "Додати";
+            додатиToolStripMenuItem.Click += addCoinToCollectionOfCollectorButton_Click;
+            // 
+            // видалитиToolStripMenuItem
+            // 
+            видалитиToolStripMenuItem.Name = "видалитиToolStripMenuItem";
+            видалитиToolStripMenuItem.Size = new Size(160, 22);
+            видалитиToolStripMenuItem.Text = "Видалити";
+            видалитиToolStripMenuItem.Click += deleteCoinInCollectionOfCollectorButton_Click;
+            // 
+            // зберегтиToolStripMenuItem1
+            // 
+            зберегтиToolStripMenuItem1.Name = "зберегтиToolStripMenuItem1";
+            зберегтиToolStripMenuItem1.Size = new Size(160, 22);
+            зберегтиToolStripMenuItem1.Text = "Зберегти";
+            зберегтиToolStripMenuItem1.Click += зберегтиToolStripMenuItem_Click;
+            // 
+            // вийтиЗДодаткуToolStripMenuItem
+            // 
+            вийтиЗДодаткуToolStripMenuItem.Name = "вийтиЗДодаткуToolStripMenuItem";
+            вийтиЗДодаткуToolStripMenuItem.Size = new Size(160, 22);
+            вийтиЗДодаткуToolStripMenuItem.Text = "Вийти з додатку";
+            вийтиЗДодаткуToolStripMenuItem.Click += вийтиЗДодаткуToolStripMenuItem_Click;
             // 
             // collectorBindingSource
             // 
@@ -343,6 +409,7 @@ namespace dovidnyk_numizmata.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.SeaShell;
             ClientSize = new Size(1902, 555);
             Controls.Add(searchingCollectionOfCollectorLabel);
             Controls.Add(searchingAllCoinsLabel);
@@ -357,6 +424,8 @@ namespace dovidnyk_numizmata.Forms
             Controls.Add(searchingAllCoinsTextBox);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            MaximumSize = new Size(1918, 594);
+            MinimumSize = new Size(1918, 594);
             Name = "CollectionsOfCollectorsForm";
             Text = "ColectionsOfCollectorsForm";
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).EndInit();
@@ -378,7 +447,6 @@ namespace dovidnyk_numizmata.Forms
         private TextBox searchingCollectionOfCollectorTextBox;
         private Button deleteCoinInCollectionOfCollectorButton;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem зберегтиToolStripMenuItem;
         private BindingSource coinBindingSource;
         public BindingSource ownedCoinBindingSource;
         private Label NameOfCollectorTitle;
@@ -404,5 +472,14 @@ namespace dovidnyk_numizmata.Forms
         private DataGridViewTextBoxColumn CoinRemaining;
         private DataGridViewTextBoxColumn conditionDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn CoinIsRare;
+        private ToolStripMenuItem навігаціяToolStripMenuItem;
+        private ToolStripMenuItem монетиToolStripMenuItem;
+        private ToolStripMenuItem колекціонериToolStripMenuItem;
+        private ToolStripMenuItem мояКолекціяToolStripMenuItem;
+        private ToolStripMenuItem функціїToolStripMenuItem;
+        private ToolStripMenuItem додатиToolStripMenuItem;
+        private ToolStripMenuItem видалитиToolStripMenuItem;
+        private ToolStripMenuItem зберегтиToolStripMenuItem1;
+        private ToolStripMenuItem вийтиЗДодаткуToolStripMenuItem;
     }
 }

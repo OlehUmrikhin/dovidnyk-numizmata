@@ -23,11 +23,6 @@ namespace dovidnyk_numizmata.Forms
         {
             InitializeComponent();
             coinBindingSource.DataSource = AppState.CoinsList;
-
-            //AppState.TestDataCoins("CША", "долар");
-            //AppState.TestDataCoins("Україна", "гривня");
-            //AppState.TestDataCoins("Німеччина", "євро");
-            //coinBindingSource.ResetBindings(true);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -37,7 +32,7 @@ namespace dovidnyk_numizmata.Forms
             {
                 AppState.addCoinForm = new AddCoinForm();
             }
-            AppState.addCoinForm.Show();
+            AppState.addCoinForm.ShowDialog();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -75,24 +70,18 @@ namespace dovidnyk_numizmata.Forms
 
         }
 
-
-        private void закритиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            Close();
-        }
-
         private void мояКолекціяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (AppState.collectionOfCollectorsForm == null || AppState.collectionOfCollectorsForm.IsDisposed)
+            if (AppState.myCollectionOfCollectorsForm == null || AppState.myCollectionOfCollectorsForm.IsDisposed)
             {
 
                 if (me != null)
                 {
-                    AppState.collectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
-                    AppState.collectionOfCollectorsForm.Show();
+                    AppState.myCollectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
+                    AppState.myCollectionOfCollectorsForm.Show();
                 }
             }
+            AppState.myCollectionOfCollectorsForm?.Activate();
 
         }
 
@@ -101,9 +90,9 @@ namespace dovidnyk_numizmata.Forms
             if (AppState.collectorsForm == null || AppState.collectorsForm.IsDisposed)
             {
                 AppState.collectorsForm = new CollectorsForm();
+                AppState.collectorsForm.Show();
             }
-            //this.Hide();
-            AppState.collectorsForm.Show();
+            AppState.collectorsForm.Activate();
         }
 
         public void CoinsForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -159,6 +148,11 @@ namespace dovidnyk_numizmata.Forms
             coinBindingSource.DataSource = AppState.CoinsList;
             coinBindingSource.ResetBindings(false);
             collectionOfCoinsDataGridView.ClearSelection();
+        }
+
+        private void вийтиЗДодаткуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

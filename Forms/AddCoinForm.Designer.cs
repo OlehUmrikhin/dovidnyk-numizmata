@@ -42,8 +42,8 @@
             parCoinsLabel = new Label();
             countryCoinsLabel = new Label();
             panel2 = new Panel();
-            addLabel = new Label();
             AddCoinButton = new Button();
+            addLabel = new Label();
             coinBindingSource = new BindingSource(components);
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)coinBindingSource).BeginInit();
@@ -153,6 +153,17 @@
             panel2.Size = new Size(381, 318);
             panel2.TabIndex = 37;
             // 
+            // AddCoinButton
+            // 
+            AddCoinButton.BackColor = SystemColors.Control;
+            AddCoinButton.Location = new Point(155, 270);
+            AddCoinButton.Name = "AddCoinButton";
+            AddCoinButton.Size = new Size(75, 23);
+            AddCoinButton.TabIndex = 0;
+            AddCoinButton.Text = "Додати";
+            AddCoinButton.UseVisualStyleBackColor = false;
+            AddCoinButton.Click += AddCoinButton_Click;
+            // 
             // addLabel
             // 
             addLabel.AutoSize = true;
@@ -163,16 +174,6 @@
             addLabel.TabIndex = 1;
             addLabel.Text = "Додавання монети";
             // 
-            // AddCoinButton
-            // 
-            AddCoinButton.Location = new Point(155, 270);
-            AddCoinButton.Name = "AddCoinButton";
-            AddCoinButton.Size = new Size(75, 23);
-            AddCoinButton.TabIndex = 0;
-            AddCoinButton.Text = "Додати";
-            AddCoinButton.UseVisualStyleBackColor = true;
-            AddCoinButton.Click += AddCoinButton_Click;
-            // 
             // coinBindingSource
             // 
             coinBindingSource.DataSource = typeof(Models.Coin);
@@ -181,6 +182,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.SeaShell;
             ClientSize = new Size(443, 375);
             Controls.Add(addLabel);
             Controls.Add(featuresCoinsTextBox);
@@ -196,6 +198,8 @@
             Controls.Add(parCoinsLabel);
             Controls.Add(countryCoinsLabel);
             Controls.Add(panel2);
+            MaximumSize = new Size(459, 414);
+            MinimumSize = new Size(459, 414);
             Name = "AddCoinForm";
             Text = "AddCoinForm";
             panel2.ResumeLayout(false);

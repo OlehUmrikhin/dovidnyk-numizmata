@@ -58,7 +58,6 @@ namespace dovidnyk_numizmata.Models
         public Guid CoinId { get; set; }
 
         public string Condition { get; set; }
-        //
 
         public OwnedCoin(Coin coin, string Condition)
         {
@@ -74,9 +73,5 @@ namespace dovidnyk_numizmata.Models
             this.Condition = Condition;
         }
 
-        public override string ToString()
-        {
-            return $"{Coin.ToString()}, {Condition}";
-        }
     }
 }

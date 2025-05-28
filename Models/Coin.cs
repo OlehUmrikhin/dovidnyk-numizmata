@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dovidnyk_numizmata.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dovidnyk_numizmata.Models
 {
-    public class Coin
+    public class Coin : IIsIdentical
     {
         public Guid Id { get; set; }
         public string Country { get; set; }
@@ -21,16 +22,6 @@ namespace dovidnyk_numizmata.Models
         public bool IsRare 
         {
             get { return Amount <= 100; }
-        }
-
-        [JsonIgnore]
-        public string Info 
-        {
-            get 
-            {
-                return ToString();
-            }
-            
         }
 
         public Coin(string Country, string Par, string YearOfGraduation, string Material, int Amount, string Features, int RemainingCoins)
@@ -56,11 +47,6 @@ namespace dovidnyk_numizmata.Models
             this.Amount = Amount;
             this.Features = Features;
             this.RemainingCoins = RemainingCoins;
-        }
-
-        public override string ToString()
-        {
-            return $"{Country} - {Par} ({YearOfGraduation})  |  Матеріал: {Material}  |  Кількість: {Amount}  |  Залишилося: {RemainingCoins}  |  Особливості: {Features}";
         }
 
         public bool IsIdentical(Coin otherCoin)

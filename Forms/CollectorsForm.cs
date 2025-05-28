@@ -19,9 +19,6 @@ namespace dovidnyk_numizmata
         {
             InitializeComponent();
             collectorBindingSource.DataSource = AppState.CollectorsList;
-
-            //AppState.TestDataCollectors("Німеччина");
-            //collectorBindingSource.ResetBindings(true);
         }
 
         private void монетиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -29,14 +26,10 @@ namespace dovidnyk_numizmata
             if (AppState.coinsForm == null || AppState.coinsForm.IsDisposed)
             {
                 AppState.coinsForm = new CoinsForm();
+                AppState.coinsForm.Show();
             }
-            //this.Hide();
-            AppState.coinsForm.Show();
-        }
+            AppState.coinsForm?.Activate();
 
-        private void колекціонериToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            return;
         }
 
         private void addCollectorButton_Click(object sender, EventArgs e)
@@ -50,7 +43,7 @@ namespace dovidnyk_numizmata
 
         private void deleteCollectorButton_Click(object sender, EventArgs e)
         {
-            if (collectorBindingSource.Current is Collector collectorToRemove && collectorToRemove.Id.ToString() != AppState.MyId) 
+            if (collectorBindingSource.Current is Collector collectorToRemove && collectorToRemove.Id.ToString() != AppState.MyId)
             {
                 var result = MessageBox.Show("Чи дійсно Ви хочете видалити цього колекціонера?", "Повідомлення", MessageBoxButtons.YesNo);
                 switch (result)
@@ -80,27 +73,30 @@ namespace dovidnyk_numizmata
 
         private void lookCollectionOfCollectorButton_Click(object sender, EventArgs e)
         {
-            if (AppState.collectionsOfCollectorsForm == null || AppState.collectionsOfCollectorsForm.IsDisposed)
+            var me = AppState.CollectorsList?.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
+            if (collectorBindingSource.Current is Collector selectedCollector)
             {
-                if (collectorBindingSource.Current is Collector selectedCollector) 
+                if (selectedCollector != me)
                 {
-                    var me = AppState.CollectorsList.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
-                    if (selectedCollector != null && selectedCollector != me)
+
+                    if (AppState.collectionsOfCollectorsForm == null || AppState.collectionsOfCollectorsForm.IsDisposed)
                     {
                         AppState.collectionsOfCollectorsForm = new CollectionsOfCollectorsForm(selectedCollector);
                         AppState.collectionsOfCollectorsForm.Show();
                     }
-                    else if (selectedCollector == me)
+                    AppState.collectionsOfCollectorsForm?.Activate();
+                }
+                if (selectedCollector == me)
+                {
+                    if (AppState.myCollectionOfCollectorsForm == null || AppState.myCollectionOfCollectorsForm.IsDisposed)
                     {
-                        if (AppState.collectionOfCollectorsForm == null || AppState.collectionOfCollectorsForm.IsDisposed)
+                        if (me != null)
                         {
-                            if (me != null)
-                            {
-                                AppState.collectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
-                                AppState.collectionOfCollectorsForm.Show();
-                            }
+                            AppState.myCollectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
+                            AppState.myCollectionOfCollectorsForm.Show();
                         }
                     }
+                    AppState.myCollectionOfCollectorsForm?.Activate();
                 }
             }
         }
@@ -123,30 +119,27 @@ namespace dovidnyk_numizmata
             ).ToList();
 
             collectorBindingSource.DataSource = result;
-            
+
         }
 
-        //public void CollectorsForm_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    if (AppState.isEdit)
-        //    {
-        //        var result = MessageBox.Show("Чи хочете зберегти зміни?", "Повідомлення", MessageBoxButtons.YesNoCancel);
-        //        switch (result)
-        //        {
-        //            case DialogResult.Yes:
-        //                string jsonStringCoinsList = JsonSerializer.Serialize(AppState.CoinsList);
-        //                string jsonStringCollectorList = JsonSerializer.Serialize(AppState.CollectorsList);
-        //                File.WriteAllText("coins.txt", jsonStringCoinsList);
-        //                File.WriteAllText("collectors.txt", jsonStringCollectorList);
-        //                break;
-        //            case DialogResult.No:
-        //                break;
-        //            case DialogResult.Cancel:
-        //                e.Cancel = true;
-        //                break;
-        //        }
-        //    }
-        //}
+        private void мояКолекціяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var me = AppState.CollectorsList?.FirstOrDefault(c => c.Id == Guid.Parse(AppState.MyId));
+            if (AppState.myCollectionOfCollectorsForm == null || AppState.myCollectionOfCollectorsForm.IsDisposed)
+            {
+                if (me != null)
+                { 
+                    AppState.myCollectionOfCollectorsForm = new CollectionsOfCollectorsForm(me);
+                    AppState.myCollectionOfCollectorsForm.Show();
+                    
+                }
+            }
+            AppState.myCollectionOfCollectorsForm?.Activate();
+        }
+
+        private void вийтиЗДодаткуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
-    
 }

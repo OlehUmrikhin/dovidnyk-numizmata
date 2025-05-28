@@ -10,7 +10,7 @@ namespace dovidnyk_numizmata
         {
             ApplicationConfiguration.Initialize();
             AppState.Initialize();
-            Application.Run(new CoinsForm());
+            Application.Run(AppState.coinsForm = new CoinsForm());
         }
     }
 }

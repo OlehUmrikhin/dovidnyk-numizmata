@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dovidnyk_numizmata.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -10,20 +11,13 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace dovidnyk_numizmata.Models
 {
-    public class Collector
+    public class Collector : ICollector
     {
         public Guid Id { get; set; }
         public string Country { get; set; }
         public string Name { get; set; }
         public string Contacts { get; set; }
-        [JsonIgnore]
-        public string Info
-        {
-            get
-            {
-                return $"Країна: {Country}  |  Ім'я: {Name}  |  Контакти: {Contacts}";
-            }
-        }
+
         public List<OwnedCoin> CoinsCollection { get; set; } = new List<OwnedCoin>();
 
 
@@ -37,11 +31,13 @@ namespace dovidnyk_numizmata.Models
         public void CollectCoin(Coin coin, string Condition)
         {
             OwnedCoin newOwnedCoin = new OwnedCoin(coin, Condition);
+            coin.RemainingCoins--;
             CoinsCollection.Add(newOwnedCoin);
         }
 
         public void DeCollectCoin(OwnedCoin ownedCoin) 
         {
+            ownedCoin.Coin.RemainingCoins++;
             CoinsCollection.Remove(ownedCoin);
         }
 

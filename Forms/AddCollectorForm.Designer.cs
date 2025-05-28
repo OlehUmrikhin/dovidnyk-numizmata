@@ -40,12 +40,13 @@
             // 
             // addCollectorButton
             // 
+            addCollectorButton.BackColor = SystemColors.Control;
             addCollectorButton.Location = new Point(187, 191);
             addCollectorButton.Name = "addCollectorButton";
             addCollectorButton.Size = new Size(75, 23);
             addCollectorButton.TabIndex = 16;
             addCollectorButton.Text = "Додати";
-            addCollectorButton.UseVisualStyleBackColor = true;
+            addCollectorButton.UseVisualStyleBackColor = false;
             addCollectorButton.Click += addCollectorButton_Click;
             // 
             // contactsCollectorTextBox
@@ -110,6 +111,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.SeaShell;
             ClientSize = new Size(447, 251);
             Controls.Add(addingCollectorLabel);
             Controls.Add(addCollectorButton);
@@ -119,6 +121,8 @@
             Controls.Add(contactsCollectorLabel);
             Controls.Add(nameCollectorLabel);
             Controls.Add(countryCollectorLabel);
+            MaximumSize = new Size(463, 290);
+            MinimumSize = new Size(463, 290);
             Name = "AddCollectorForm";
             Text = "AddCollectorForm";
             ResumeLayout(false);

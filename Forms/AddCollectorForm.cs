@@ -35,10 +35,7 @@ namespace dovidnyk_numizmata.Forms
                     {
                         MessageBox.Show("Колекціонер успішно доданий!", "Додавання", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         AppState.CollectorsList.Add(newCollector);
-                        //AppState.SortCoinsByCountry();
                         AppState.isEdit = true;
-                        //collectorsBindingSource.DataSource = AppState.CollectorsList;
-                        //coinBindingSource.ResetBindings(true);
                         this.Close();
                     }
                     else
